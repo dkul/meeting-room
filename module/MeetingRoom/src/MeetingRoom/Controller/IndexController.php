@@ -14,6 +14,8 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use MeetingRoom\Entity\MeetingRoom as MeetingRoomEntity;
 use MeetingRoom\Entity\PC;
+use MeetingRoom\Form\PcForm;
+use MeetingRoom\Form\PcFilter;
 
 class IndexController extends AbstractActionController
 {
@@ -27,7 +29,33 @@ class IndexController extends AbstractActionController
 
     public function addAction()
     {
-        $data = array(
+        $request=$this->getRequest();
+
+
+        $form = new PcForm();
+        $formInputFilter=new PcFilter();
+        $form->setInputFilter($formInputFilter->getInputFilter());
+
+        if ($request->isPost()){
+            $form->setData($request->getPost());
+            if($form->isValid()){
+                echo 'Velidatedata!';
+            }else {
+                echo 'Error validate!';
+            }
+        }
+        $data=array(
+            'title'=>'Create PC',
+            'form'=>$form
+        );
+        $view = new ViewModel($data);
+        $view->setTemplate('meeting-room/form/add-meeting-room');
+        return $view;
+
+
+
+
+       /* $data = array(
             'title' => 'Form add meeting room!!!'
         );
 
@@ -51,7 +79,7 @@ class IndexController extends AbstractActionController
 
         $view = new ViewModel($data);
         $view->setTemplate('meeting-room/form/add-meeting-room');
-        return $view;
+        return $view;*/
     }
 
     public function editAction()

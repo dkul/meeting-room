@@ -1,0 +1,23 @@
+<?php
+/** @var \MeetingRoom\Entity\MeetingRoom $meetingRoom */
+$PC = $this->result;
+?>
+<div>
+    <h1><?php echo $this->title; ?></h1>
+    <?php
+        if($PC->getId()){
+            echo 'Title PC:' . $PC->getTitle();
+            echo '<br/>';
+            echo 'Is Camera:' . $PC->getIsCamera();
+            echo '<br/>';
+            echo 'Is Internet:' . $PC->getIsInternet();
+        }
+       ?>
+</div>
+<div>
+    <?php
+    if($this->error){
+        echo $this->error;
+    }
+    ?>
+</div>
