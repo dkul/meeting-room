@@ -9,7 +9,7 @@
 namespace MeetingRoom\Model;
 
 
-class MeetingRoomList
+class PClist
 {
     private $list = array(
         'title' => 'Hello Kitty!',
