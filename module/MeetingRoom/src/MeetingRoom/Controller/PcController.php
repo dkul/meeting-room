@@ -15,11 +15,12 @@ class PcController extends AbstractActionController
 {
     public function indexAction()
         {
-            echo "kkkkkkkkkkkkkkkk";
-           /* $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-            $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\PC')->findAll();
 
-            return array('listMeetingRoom' => $listMeetingRoom);*/
+            $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            $listPc = $entityManager->getRepository('MeetingRoom\Entity\PC')->findAll();
+
+            return array('listPc' => $listPc);
+
         }
 
     public function addAction()

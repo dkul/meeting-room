@@ -21,6 +21,7 @@ class PcFilter implements InputFilterAwareInterface {
      * @param  InputFilterInterface $inputFilter
      * @return InputFilterAwareInterface
      */
+    protected $inputFilter;
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception('Not use');

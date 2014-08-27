@@ -1,0 +1,18 @@
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <td>Title</td>
+    </tr>
+    </thead>
+    <?php
+    /**@var MeetingRoom\Entity\PC $pc */
+    $listPc = $this->listPc;
+
+    foreach ($listPc as $key => $pc):?>
+        <tr>
+            <td><?php echo $pc->getTitle() . "<br/>";?></td>
+        </tr>
+        <?php
+    endforeach;
+    ?>
+</table>

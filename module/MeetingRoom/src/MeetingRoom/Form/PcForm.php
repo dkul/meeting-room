@@ -7,7 +7,7 @@ use Zend\Form\Form;
 class PcForm extends Form{
 public function __construct()
 {
-parent::__construct('album');
+parent::__construct('pc');
 $this->setAttribute('method', 'post');
 $this->add(array(
     'name' => 'id',
