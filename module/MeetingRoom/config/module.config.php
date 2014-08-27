@@ -17,12 +17,29 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+            ),
+
+            'pc' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/room/pc[/:action][/:list]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'list'         => '[a-zA-Z][a-zA-Z0-9_-]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'MeetingRoom\Controller\PC',
+                        'action'     => 'index',
+                    ),
+                ),
             )
-        ),
+
+        )
     ),
     'controllers' => array(
         'invokables' => array(
-            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController'
+            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController',
+            'MeetingRoom\Controller\PC' => 'MeetingRoom\Controller\PcController'
         ),
     ),
     'view_manager' => array(
