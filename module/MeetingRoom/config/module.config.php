@@ -18,7 +18,7 @@ return array(
                     ),
                 ),
             ),
-            'pcComps' => array(
+            /*'pcComps' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/room[/:pc][/:id]',
@@ -31,7 +31,7 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-            ),
+            ),*/
         ),
     ),
     'controllers' => array(
