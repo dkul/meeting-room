@@ -1,0 +1,24 @@
+<table class="tablePC">
+    <tr>
+        <td>ID</td>
+        <td>Title</td>
+        <td>IsCamera</td>
+        <td>IsInternet</td>
+    </tr>
+    <?php foreach($this->listItems as $pc){ ?>
+        <tr>
+            <td><?php echo $pc->getId(); ?></td>
+            <td><?php echo $this->escapeHtml($pc->getTitle()); ?></td>
+
+            <?php if ($pc->getIsCamera()) {
+            echo '<td>';
+                echo $pc->getIsCamera(); echo '</td>';}
+            else {echo '<td>'; echo 0; echo '</td>'; }?>
+
+            <?php if ($pc->getIsInternet()) {
+                echo '<td>';
+                echo $pc->getIsInternet(); echo '</td>';}
+            else {echo '<td>'; echo 0; echo '</td>'; }?>
+        </tr>
+    <?php } ?>
+</table>
