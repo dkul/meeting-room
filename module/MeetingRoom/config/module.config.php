@@ -7,8 +7,9 @@ return array(
             'rooms' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/room[/:action][/:id]',
+                    'route'    => '/room[/:controller][/:action][/:id]',
                     'constraints' => array(
+                       'controller'=>'[a-zA-Z][a-zA-Z0-9_-]*',
                         'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'         => '[0-9]*'
                     ),
@@ -20,9 +21,13 @@ return array(
             )
         ),
     ),
+
     'controllers' => array(
         'invokables' => array(
-            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController'
+            'pc'=>'MeetingRoom\Controller\PcController',
+            'index' => 'MeetingRoom\Controller\IndexController',
+            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController',
+            'MeetingRoom\Controller\Pc' => 'MeetingRoom\Controller\PcController'
         ),
     ),
     'view_manager' => array(

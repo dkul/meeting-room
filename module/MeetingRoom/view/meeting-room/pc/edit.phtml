@@ -1,0 +1,18 @@
+<?php
+/**@var MeetingRoom\Entity\PC $pc*/
+$pc=$this->pc
+?>
+<div class="row">
+    <div class="title col-sm-2"><?php echo $pc->getTitle()?></div>
+    <div class="camera col-sm-2"><?php
+        if($pc->getIsCamera()==null) echo 'No';
+        else echo 'Yes';
+        ?>
+    </div>
+    <div class="internet col-sm-2"><?php
+        if($pc->getIsInternet()==null) echo 'No';
+        else echo 'Yes';
+        ?>
+    </div>
+</div>
+</div>

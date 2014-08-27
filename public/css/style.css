@@ -35,3 +35,18 @@ div.container a.brand {
     margin-left: 0;
     padding: 8px 20px 12px 40px;
 }
+
+/*myStyles */
+div.row{
+    width: 800px;
+}
+div.header{
+    background: #adadad;
+    padding: 5px;
+}
+
+.row{
+    margin: 0;
+    padding-top: 5px;
+    background: #dcdcdc;
+}
