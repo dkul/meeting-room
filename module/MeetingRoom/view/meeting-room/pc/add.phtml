@@ -1,14 +1,11 @@
 <?php
 /** @var Zend\Form\Form $form */
 $form=$this->form;
-
-$formLabel=$this->plugin('formLabel');
 ?>
-  <?php /*  <div>
+    <div>
         <h1><?php echo $this->title; ?></h1>
     </div>
- */?>
-<?php  echo $this->form()->openTag($form)?>
+<?php echo $this->form()->openTag($form)?>
     <fieldset>
         <legend><?php echo $this->title;?></legend>
         <?php
@@ -16,22 +13,6 @@ $formLabel=$this->plugin('formLabel');
         echo $formLabel->openTag() . $title->getOption('label') . $formLabel->closeTag();
         echo $this->formInput($title);
         echo $this->formElementErrors($title);
-
-        echo '<br/>';
-
-        $isCamera = $form->get('is_camera');
-        echo $formLabel->openTag() . $isCamera->getOption('label') . $formLabel->closeTag();
-        echo $this->formInput($isCamera);
-        echo $this->formElementErrors($isCamera);
-        echo '<br/>';
-
-        $isInternet = $form->get('is_internet');
-        echo $formLabel->openTag() . $isInternet->getOption('label') . $formLabel->closeTag();
-        echo $this->formInput($isInternet);
-        echo $this->formElementErrors($isInternet);
-        echo '<br/>';
-
-
         //echo $formLabel->formElemen($title);
         $submit = $form->get('submit');
         echo '<br/>' . $this->formInput($submit);

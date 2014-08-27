@@ -84,7 +84,5 @@ class IndexController extends AbstractActionController
         return $view;
     }
 
-    public function listAction(){
 
-    }
 }
