@@ -17,7 +17,7 @@ class PcFieldset extends Fieldset implements InputFilterProviderInterface {
     public function __construct()
     {
         parent::__construct('pc');
-        $this->setHydrator(new ClassMethodsHydrator(false))
+        $this->setHydrator(new ClassMethodsHydrator(true))
             ->setObject(new PC());
 
         $this->add(array(
@@ -30,34 +30,28 @@ class PcFieldset extends Fieldset implements InputFilterProviderInterface {
             )
         ));
 
-       /* $this->add(array(
+        $this->add(array(
             'name' => 'is_internet',
             'type' => 'checkbox',
             'options' => array(
-                'label' => 'Наличие интернета'
+                'label' => 'Наличие интернета',
             ),
-            'attributes' => array(
-                'required' => 'required'
-            )
         ));
 
         $this->add(array(
             'name' => 'is_camera',
             'type' => 'checkbox',
             'options' => array(
-                'label' => 'Наличие камеры'
+                'label' => 'Наличие камеры',
             ),
-            'attributes' => array(
-                'required' => 'required'
-            )
-        ));*/
+        ));
 
     }
 
     public function getInputFilterSpecification()
     {
         return array(
-            'name' => array(
+            'title' => array(
                 'required' => true,
             )
         );

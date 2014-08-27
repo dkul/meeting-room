@@ -49,7 +49,13 @@ return array(
         'factories' => array(
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
-            }
+            },
+            'Form\PcForm'=>function(){
+                return new \MeetingRoom\Form\PcForm();
+            },
+            'Entity\PC'=>function(){
+                return new \MeetingRoom\Entity\PC();
+            },
         )
     ),
     'doctrine' => array(

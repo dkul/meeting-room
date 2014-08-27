@@ -1,17 +1,16 @@
+<div>
+    <h3><?php echo $this->title?></h3>
+</div>
 <?php
-/**@var MeetingRoom\Form\PcForm $form*/
 $form=$this->form;
-$form->setAttribute('action', '/room/pc/add')
-    ->prepare();
+$url=$this->url('rooms',array('controller'=>'pc','action'=>'add'));
+$form->setAttribute('action', $url)->prepare();
 
-echo $this->form()->openTag($form);
-$pc=$form->get('pc');
-echo $this->formRow($pc->get('title'));
-echo "<br/>";
-/*echo $this->formRow($pc->get('is_internet'));
-echo "<br/>";
-echo $this->formRow($pc->get('is_camera'));
-echo "<br/>";*/
-echo $this->formElement($form->get('submit'));
+echo $this->partial(
+    'meeting-room/form/update-form',
+    array('form'=> $form)
+);
 
-echo $this->form()->closeTag();
+
+
+

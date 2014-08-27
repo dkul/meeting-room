@@ -8,10 +8,11 @@
 
 namespace MeetingRoom\Controller;
 
+use Doctrine\ORM\EntityManager;
 use MeetingRoom\Form\PcForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use MeetingRoom\Entity\PC;
+use MeetingRoom\Entity\PC ;
 
 
 class PcController extends AbstractActionController{
@@ -21,41 +22,50 @@ class PcController extends AbstractActionController{
         return array('listPc' => $listPc);
     }
     public function editAction(){
-
+        //$form=new PcForm;
         $id = $this->params()->fromRoute('id');
 
-        if(!empty($id)){
-            $pc=$this->getEntity('\PC')->find($id);
-            $data = array('pc' => $pc);
-        }
-        else{
-            $data = array('error' => 'Input id to URL');
-        }
 
-        $view = new ViewModel($data);
-        return $view;
+        if($pc=$this->getEntity('\PC')->find($id)){
+            $form = $this->getServiceLocator()->get('Form\PcForm');
+            $form->bind($pc);
+            if ($this->request->isPost()) {
+                $form->setData($this->request->getPost());
+                if ($form->isValid()) {
+                    $this->flushEntity($pc); //моя функция. флушит
+                    return $this->redirect()->toRoute('rooms',array('controller'=>'pc','action'=>'list'));
+                }
+            }
+
+            return array(
+                'form'=>$form,
+                'pc'=>$pc
+
+
+            );
+        }
+        return array(
+            'error'=>'Нет компьютера с указанным id.'
+        );
+
 
     }
     public  function addAction(){
-        $form = new PcForm();
-        $pc = new PC();
+        $form = $this->getServiceLocator()->get('Form\PcForm');
+        $pc = $this->getServiceLocator()->get('Entity\PC');
         $form->bind($pc);
 
         if ($this->request->isPost()) {
-            echo var_dump($this->request->isPost());
             $form->setData($this->request->getPost());
-
-
-
             if ($form->isValid()) {
-                echo "hey";
-                var_dump($pc);
+                $this->flushEntity($pc);
+                return $this->redirect()->toRoute('rooms',array('controller'=>'pc','action'=>'list'));
             }
-            var_dump($form->getMessages());
         }
 
         return array(
-            'form' => $form
+            'form' => $form,
+            'title'=>'Добавление нового компьютера'
         );
     }
 
@@ -65,6 +75,12 @@ class PcController extends AbstractActionController{
     public function getEntity($entity){
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         return $entityManager->getRepository('MeetingRoom\Entity'.$entity);
+    }
+    public function flushEntity($entity){
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $entityManager->persist($entity);
+        $entityManager->flush();
+
     }
 
 } 
