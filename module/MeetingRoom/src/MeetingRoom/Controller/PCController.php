@@ -1,10 +1,9 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * Created by PhpStorm.
+ * User: user
+ * Date: 27.08.14
+ * Time: 11:06
  */
 
 namespace MeetingRoom\Controller;
@@ -14,37 +13,34 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use MeetingRoom\Entity\MeetingRoom as MeetingRoomEntity;
 use MeetingRoom\Entity\PC;
-use MeetingRoom\Form\PcForm;
-use MeetingRoom\Form\PcFilter;
 
-
-class IndexController extends AbstractActionController
+class PCController extends AbstractActionController
 {
     public function indexAction()
     {
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->findAll();
+        $listPC = $entityManager->getRepository('MeetingRoom\Entity\PC')->findAll();
 
-        return array('listMeetingRoom' => $listMeetingRoom);
+        return array('listPC' => $listPC);
     }
 
     public function addAction()
     {
-       /* $data = array(
+        $data = array(
             'title' => 'Form add meeting room!!!'
         );
 
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
         $pc = new PC();
-        $pc->setTitle('PC-234');
+        $pc->setTitle('PC-235');
 
         $entityManager->persist($pc);
 
         $meetingRoom = new MeetingRoomEntity();
-        $meetingRoom->setTitle('Альфа3');
-        $meetingRoom->setPlace('3 этаж, 103');
-        $meetingRoom->setCapacity(3);
+        $meetingRoom->setTitle('Альфа6');
+        $meetingRoom->setPlace('4 этаж, 103');
+        $meetingRoom->setCapacity(4);
         $meetingRoom->setPc($pc);
 
         $entityManager->persist($meetingRoom);
@@ -52,29 +48,6 @@ class IndexController extends AbstractActionController
 
         $data['meeting_room_id'] = $meetingRoom->getId();
 
-        $view = new ViewModel($data);
-        $view->setTemplate('meeting-room/form/add-meeting-room');
-        return $view;
-        */
-
-        $request = $this->getRequest();
-
-
-        $form = new PcForm();
-        $formInputFilter = new PcFilter();
-        $form->setInputFilter($formInputFilter->getInputFilter());
-
-        $form->setData($request->getPost());
-        if($form->isValid()){
-            echo 'Validate data';
-        }
-        else {
-            echo 'ERROR';
-        }
-        $data = array(
-            'title' => 'Form',
-            'form' => $form
-        );
         $view = new ViewModel($data);
         $view->setTemplate('meeting-room/form/add-meeting-room');
         return $view;

@@ -17,17 +17,32 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+            ),
+            'pcs' => array(
+                'type' => 'Segment',
+                    'options' => array(
+                        'route'    => '/room/pc[/:action][/:id]',
+                        'constraints' => array(
+                            'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                            'id'         => '[0-9]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'MeetingRoom\Controller\PC',
+                        'action'     => 'index',
+                    ),
+                ),
             )
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController'
+            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController',
+            'MeetingRoom\Controller\PC' => 'MeetingRoom\Controller\PCController'
         ),
     ),
     'view_manager' => array(
         'template_path_stack' => array(
-            'meeting-room' => __DIR__ . '/../view',
+            'meeting-room' => __DIR__ . '/../view'
         ),
     ),
     'view_helpers' => array(
