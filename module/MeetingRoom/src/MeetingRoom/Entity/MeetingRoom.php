@@ -13,12 +13,10 @@ use MeetingRoom\Entity\PC as PC;
 
 /**
  * MeetingRoom
- *
  * @ORM\Table(name="meeting_room")
  * @ORM\Entity
  */
-class MeetingRoom
-{
+class MeetingRoom {
     /**
      * @var integer
      *
@@ -27,21 +25,18 @@ class MeetingRoom
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", nullable=false)
      */
     private $title;
-
     /**
      * @var string
      *
      * @ORM\Column(name="place", type="text", nullable=false)
      */
     private $place;
-
     /**
      * @var integer
      *
@@ -54,80 +49,74 @@ class MeetingRoom
      * @var \MeetingRoom\Entity\PC
      *
      * @ORM\OneToOne(targetEntity="MeetingRoom\Entity\PC")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="pc_id", referencedColumnName="id")
+     * #ORM\JoinColumns({
+     * @ORM\JoinColumn(name="pc_id", referencedColumnName="id")
      * })
      */
     private $pc;
 
 
     /**
-     * @param PC $pc
+     * @param $pc
      */
-    public function setPc(PC $pc){
+    public function setPc($pc) {
         $this->pc = $pc;
     }
 
     /**
      * @return PC
      */
-    public function getPc(){
+    public function getPc() {
         return $this->pc;
     }
+
     /**
-     *
      * @return integer
      */
     public function getId(){
         return $this->id;
     }
-
     /**
      * @param $id
      */
     public function setId($id){
         $this->id = $id;
     }
-
     /**
      * @return string
      */
     public function getTitle(){
         return $this->title;
     }
-
     /**
      * @param $title
      */
     public function setTitle($title){
         $this->title = $title;
     }
-
     /**
      * @return string
      */
     public function getPlace(){
         return $this->place;
     }
-
     /**
      * @param $place
      */
     public function setPlace($place){
         $this->place = $place;
     }
-
     /**
-     * @return int
+     * @return integer
      */
     public function getCapacity(){
         return $this->capacity;
     }
-
     /**
      * @param $capacity
      */
     public function setCapacity($capacity){
         $this->capacity = $capacity;
     }
-} 
+
+}
