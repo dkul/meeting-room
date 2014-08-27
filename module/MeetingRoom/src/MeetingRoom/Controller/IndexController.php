@@ -9,11 +9,14 @@
 
 namespace MeetingRoom\Controller;
 
+use MeetingRoom\Form\PcForm;
 use MeetingRoom\Model\MeetingRoomList;
+use Zend\Form\Form;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use MeetingRoom\Entity\MeetingRoom as MeetingRoomEntity;
 use MeetingRoom\Entity\PC;
+use MeetingRoom\Form\PcFilter;
 
 class IndexController extends AbstractActionController
 {
@@ -27,7 +30,7 @@ class IndexController extends AbstractActionController
 
     public function addAction()
     {
-        $data = array(
+       /* $data = array(
             'title' => 'Form add meeting room!!!'
         );
 
@@ -48,6 +51,32 @@ class IndexController extends AbstractActionController
         $entityManager->flush();
 
         $data['meeting_room_id'] = $meetingRoom->getId();
+
+        $view = new ViewModel($data);
+        $view->setTemplate('meeting-room/form/add-meeting-room');
+        return $view;*/
+
+        $request = $this->getRequest();
+
+        $form = new PcForm();
+        $formInputFilter = new PcFilter();
+        $form->setInputFilter($formInputFilter->getInputFilter());
+
+        $form->setData($request->getPost());
+
+        if($form->isValid())
+        {
+            echo 'Validate data!';
+        }
+        else
+        {
+            echo 'ERROR Validate!!!';
+        };
+
+        $data = array(
+            'title' => 'FormCreatePC',
+            'form'=>$form
+        );
 
         $view = new ViewModel($data);
         $view->setTemplate('meeting-room/form/add-meeting-room');

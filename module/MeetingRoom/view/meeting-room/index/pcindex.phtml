@@ -1,0 +1,8 @@
+<div class="jumbotron">
+    <a href='<?=$this->url('pcomp', array('action'=> 'edit', 'id' => 1)); ?>'>EDIT</a></div>
+<?php
+echo $this->partial(
+    'meeting-room/elements/table',
+    array('listItems' => $this->listPC)
+);
+?>

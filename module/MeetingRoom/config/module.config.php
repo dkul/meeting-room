@@ -17,12 +17,27 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-            )
+            ),
+            'pcomp' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/room/pc[/:action][/:id]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'         => '[0-9]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'MeetingRoom\Controller\PC',
+                        'action'     => 'pcindex',
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController'
+            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController',
+            'MeetingRoom\Controller\PC' => 'MeetingRoom\Controller\PCController'
         ),
     ),
     'view_manager' => array(
@@ -44,7 +59,10 @@ return array(
         'factories' => array(
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
-            }
+            },
+            'Model\PCList' => function(){
+                    return new \MeetingRoom\Model\PCList();
+                }
         )
     ),
     'doctrine' => array(
