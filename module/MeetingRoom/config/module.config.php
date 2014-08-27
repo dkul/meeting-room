@@ -9,7 +9,7 @@ return array(
                 'options' => array(
                     'route'    => '/room[/:action][/:id]',
                     'constraints' => array(
-                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                       'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'         => '[0-9]*'
                     ),
                     'defaults' => array(
@@ -17,7 +17,21 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
-            )
+            ),
+            'pcComps' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/room[/:pc][/:id]',
+                    'constraints' => array(
+                        'pc'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'         => '[a-zA-Z][a-zA-Z0-9_-]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'MeetingRoom\Controller\Index',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
         ),
     ),
     'controllers' => array(
