@@ -1,0 +1,42 @@
+<?php
+
+$form = $this->form;
+$formlabel = $this->plugin('formlabel');
+?>
+
+
+<?php echo $this->form()->openTag($form) ?>
+    <firldset>
+        <legend><?php echo $this->title?></legend>
+        <?php
+        $title = $form->get('title');
+        echo $formlabel->openTag().$title->getOption('label');
+        echo $this->formInput($title);
+        echo $this->formElementErrors($title);
+        echo $formlabel->closetag();
+
+        echo '<br>';
+
+        $isCamera = $form->get('is_camera');
+        echo $formlabel->openTag().$isCamera->getOption('label');
+        echo $this->formInput($isCamera);
+        echo $this->formElementErrors($isCamera);
+        echo $formlabel->closetag();
+        echo '<br>';
+
+        $isInternet = $form->get('is_internet');
+        echo $formlabel->openTag().$isInternet->getOption('label');
+        echo $this->formInput($isInternet);
+        echo $this->formElementErrors($isInternet);
+        echo $formlabel->closetag();
+        echo '<br>';
+
+        $submit = $form->get('submit');
+        echo $this->formInput($submit);
+        //echo
+
+        ?>
+    </firldset>
+
+
+<?php echo $this->form()->closeTag($form) ?>

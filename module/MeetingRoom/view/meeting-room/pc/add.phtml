@@ -1,0 +1,55 @@
+<?php
+/** @var \Zend\Form\Form $form $form */
+/*$form = $this->form;
+$formLabel = $this->plugin('formlabel');
+echo $this->form()->openTag($form);
+
+?>
+<fildset>
+    <legend><?php echo $this->title; ?></legend>
+    <?php
+    $title = $form->get('title');
+    echo $formLabel->openTag(). $title->getOption('label');
+    echo $this->formInput($title);
+    echo $this->formElementErrors($title);
+
+    echo '<br/>';
+
+    $isCamera = $form->get('is_camera');
+    echo $formLabel->openTag() . $isCamera->getOption('label') . $formLabel->closeTag();
+    echo $this->formInput($isCamera);
+    echo $this->formElementErrors($isCamera);
+
+    echo '<br/>';
+
+    $isInternet = $form->get('is_internet');
+    echo $formLabel->openTag() . $isInternet->getOption('label') . $formLabel->closeTag();
+    echo $this->formInput($isInternet);
+    echo $this->formElementErrors($isInternet);
+
+
+
+    $submit = $form->get('submit');
+    echo '<br/>' . $this->formInput($submit);
+    ?>
+</fildset>
+<?php $this->form()->closeTag($form); ?>*/
+
+$form->setAttribute('action', $this->url('pc', array('action' => 'add')))
+    ->prepare();
+
+echo $this->form()->openTag($form);
+
+$pc = $form->get('pc');
+
+echo $this->formRow($pc->get('title'));
+echo '<br/>';
+echo $this->formRow($pc->get('is_camera'));
+echo '<br/>';
+echo $this->formRow($pc->get('is_internet'));
+echo '<br/>';
+
+echo $this->formHidden($form->get('csrf'));
+echo $this->formElement($form->get('submit'));
+
+echo $this->form()->closeTag();

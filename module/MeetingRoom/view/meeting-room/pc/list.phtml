@@ -8,7 +8,7 @@
         array('listItems' => $this->listPc)
     );*/
     //var_dump($this->listPC);
-    foreach($this->listPC as $pc)
+    foreach($this->listPc as $pc)
     {
         echo '<tr><td>'.$pc->getId().'<td>'.$pc->getTitle().'<td>'.$pc->getIsCamera().'<td>'.$pc->getIsInternet().'</td><td><a href="'.$this->url('pc',array('action'=>'edit', 'id'=>$pc->getId())).'">Edit</a></td></tr>';
     }

@@ -2,14 +2,14 @@
 /**
  * Created by PhpStorm.
  * User: user
- * Date: 21.08.14
- * Time: 14:44
+ * Date: 28.08.14
+ * Time: 16:52
  */
 
 namespace MeetingRoom\Model;
 
 
-class MeetingRoomList
+class PClist
 {
     private $list = array(
         'title' => 'Hello Kitty!',
@@ -24,4 +24,4 @@ class MeetingRoomList
     public function get(){
         return $this->list;
     }
-} 
+}
