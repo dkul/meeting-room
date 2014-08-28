@@ -19,10 +19,15 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $pcGrid=$this->getServiceLocator()->get('MeetingRoom\Grid\MeetingRoom');
+        $listMeetingRoom=$pcGrid->getList();
+        var_dump($listMeetingRoom);
+
+        return array('listMeetingRoom'=>$listMeetingRoom);
+       /* $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->findAll();
 
-        return array('listMeetingRoom' => $listMeetingRoom);
+        return array('listMeetingRoom' => $listMeetingRoom);*/
     }
 
     public function addAction()
@@ -32,6 +37,7 @@ class IndexController extends AbstractActionController
         );
 
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+
 
         $pc = new PC();
         $pc->setTitle('PC-234');

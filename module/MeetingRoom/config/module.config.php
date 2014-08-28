@@ -24,10 +24,11 @@ return array(
 
     'controllers' => array(
         'invokables' => array(
+            'meeting-room'=>'MeetingRoom\Controller\MeetingRoomController',
             'pc'=>'MeetingRoom\Controller\PcController',
             'index' => 'MeetingRoom\Controller\IndexController',
             'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController',
-            'MeetingRoom\Controller\Pc' => 'MeetingRoom\Controller\PcController'
+            'MeetingRoom\Controller\Pc' => 'MeetingRoom\Controller\PcController',
         ),
     ),
     'view_manager' => array(
@@ -53,9 +54,26 @@ return array(
             'Form\PcForm'=>function(){
                 return new \MeetingRoom\Form\PcForm();
             },
+            'Form\MeetingRoomForm'=>function(){
+                    return new \MeetingRoom\Form\MeetingRoomForm();
+                },
+
             'Entity\PC'=>function(){
                 return new \MeetingRoom\Entity\PC();
             },
+            'Entity\MeetingRoom'=>function(){
+                    return new \MeetingRoom\Entity\MeetingRoom();
+                },
+            'MeetingRoom\Mapper\PC'=>function($serviceManager){
+
+                    return \MeetingRoom\Mapper\PCMapper($serviceManager->get('Doctrine\ORM\EntityManager'));
+                },
+            'MeetingRoom\Grid\MeetingRoom'=>function($serviceManager){
+                    $grid= new\MeetingRoom\Model\MeetingRoomGrid();
+                    $grid->setEntityManager($serviceManager->get('Doctrine\ORM\EntityManager'));
+                    return $grid;
+                }
+
         )
     ),
     'doctrine' => array(

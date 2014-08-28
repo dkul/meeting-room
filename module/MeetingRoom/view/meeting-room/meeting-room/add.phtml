@@ -1,0 +1,31 @@
+<?php
+/**@var MeetingRoom\Form\PcForm $form*/
+
+$url=$this->url('rooms',array('controller'=>'meeting-room','action'=>'add'));
+$form->setAttribute('action', $url)->prepare();
+$form=$this->form;
+
+
+echo $this->form()->openTag($form);
+$meetingRoom=$form->get('room');
+echo $this->formRow($meetingRoom->get('title'));
+echo "<br/>";
+echo $this->formRow($meetingRoom->get('place'));
+echo "<br/>";
+echo $this->formRow($meetingRoom->get('capacity'));
+echo "<br/>";
+$pc = $meetingRoom->get('pc');
+//echo $this->formCollection($meetingRoom->get('pc'));
+
+//pc
+$pc=$meetingRoom->get('pc');
+echo $this->formRow($pc->get('title'));
+echo "<br/>";
+echo $this->formRow($pc->get('is_internet'));
+echo "<br/>";
+echo $this->formRow($pc->get('is_camera'));
+echo "<br/>";
+echo $this->formElement($form->get('submit'));
+
+echo $this->form()->closeTag();
+?>

@@ -23,7 +23,7 @@ class PcFieldset extends Fieldset implements InputFilterProviderInterface {
         $this->add(array(
             'name' => 'title',
             'options' => array(
-                'label' => 'Title'
+                'label' => 'Название компьютера'
             ),
             'attributes' => array(
                 'required' => 'required'
@@ -45,6 +45,8 @@ class PcFieldset extends Fieldset implements InputFilterProviderInterface {
                 'label' => 'Наличие камеры',
             ),
         ));
+
+
 
     }
 

@@ -7,7 +7,7 @@ $url=$this->url('rooms',array('controller'=>'pc','action'=>'add'));
 $form->setAttribute('action', $url)->prepare();
 
 echo $this->partial(
-    'meeting-room/form/update-form',
+    'meeting-room/form/update-pc',
     array('form'=> $form)
 );
 

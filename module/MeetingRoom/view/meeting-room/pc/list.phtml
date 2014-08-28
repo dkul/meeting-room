@@ -22,4 +22,8 @@ foreach($this->listPc as $key=>$pc):?>
         <div class="ref col-sm-3"><a class="btn btn-link" href="http://master-class.local/room/pc/edit/<?php echo $pc->getId();?>">Редактировать</a></div>
     </div>
 
-<?php endforeach;?>
+<?php endforeach;
+$url=$this->url('rooms',array('controller'=>'pc','action'=>'add'));
+?>
+
+<a class='btn btn-info mybtn'href="<?php echo $url;?>">Добавить новый копьютер</a>
