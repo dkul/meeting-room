@@ -64,14 +64,14 @@ class IndexController extends AbstractActionController
 
         $form->setData($request->getPost());
 
-        if($form->isValid())
-        {
-            echo 'Validate data!';
-        }
-        else
-        {
-            echo 'ERROR Validate!!!';
-        };
+//        if($form->isValid())
+//        {
+//            echo 'Validate data!';
+//        }
+//        else
+//        {
+//            echo 'ERROR Validate!!!';
+//        };
 
         $data = array(
             'title' => 'FormCreatePC',

@@ -7,3 +7,10 @@ echo $this->partial(
          array('listItems' => $this->listMeetingRoom)
      );
 ?>
+<a href='<?=$this->url('pcs', array('action'=> 'edit', 'id' => 1)); ?>'>EDIT</a></div>
+<?php
+echo $this->partial(
+    'meeting-room/elements/table',
+    array('listItems' => $this->listPC)
+);
+?>

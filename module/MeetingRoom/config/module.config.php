@@ -18,7 +18,7 @@ return array(
                     ),
                 ),
             ),
-            'pcomp' => array(
+            'pcs' => array(
                 'type' => 'Segment',
                 'options' => array(
                     'route'    => '/room/pc[/:action][/:id]',
@@ -28,7 +28,7 @@ return array(
                     ),
                     'defaults' => array(
                         'controller' => 'MeetingRoom\Controller\PC',
-                        'action'     => 'pcindex',
+                        'action'     => 'index',
                     ),
                 ),
             ),
@@ -60,9 +60,27 @@ return array(
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
             },
+            'Form\PcForm' =>function(){
+                    return new \MeetingRoom\Form\PcForm();
+            },
+
             'Model\PCList' => function(){
                     return new \MeetingRoom\Model\PCList();
-                }
+            },
+            'Entity\PC' => function()
+            {
+                    return \MeetingRoom\Entity\PC();
+            },
+            'MeetingRoom\Mapper\PC' => function($serviceManager){
+                    return new \MeetingRoom\Mapper\PcMapper(
+                        $serviceManager->get('Doctrine\ORM\EntityManager')
+                    );
+            },
+            'MeetingRoom\Grid\MeetingRoom' => function($serviceManager) {
+                    $grid = new \MeetingRoom\Model\MeetingRoomGrid();
+                    $grid->setEntityManager($serviceManager->get('Doctrine\ORM\EntityManager'));
+                    return $grid;
+               }
         )
     ),
     'doctrine' => array(
