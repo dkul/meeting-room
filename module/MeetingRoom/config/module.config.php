@@ -60,9 +60,30 @@ return array(
         )
     ),
     'service_manager' => array(
+
+        // Фабрика должна всегда возвращать объект
         'factories' => array(
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
+            },
+            'Form\PcForm'=>function(){
+                return new \MeetingRoom\Form\PcForm();
+            },
+            'Entity\PC'=>function(){
+                return new \MeetingRoom\Entity\PC();
+            },
+            'MeetingRoom\Mapper\PC' =>function($serviceManager){
+
+               return new \MeetingRoom\Mapper\PcMapper(
+                   $serviceManager->get('Doctrine\ORM\EntityManager')
+               );
+
+            },
+            'MeetingRoom\Grid\MeetingRoom'=>function($serviceManager)
+            {
+                $grid=new \MeetingRoom\Model\MeetingRoomGrid();
+                $grid->setEntityManager($serviceManager->get('Doctrine\ORM\EntityManager'));
+                return $grid;
             }
         )
     ),

@@ -1,25 +1,48 @@
 <?php
-/** @var \MeetingRoom\Entity\PC $pc */
-$pc = $this->result;
-?>
-<div>
-    <h1><?php echo $this->title; ?></h1>
+/**
+ * @var MeetingRoom\Form\PcForm $form
+ * @var MeetingRoom\Entity\PC $pc
+ */
+if(!$this->error){
+    ?>
+    <div>
+        <h3><?php echo 'Редактирование записи с названием '.$pc->getTitle()?></h3>
+    </div>
     <?php
-    if($pc){
-        echo 'Title: ' . $pc->getTitle();
-        echo '<br/>';
-        echo 'Is camera:' . $pc->getIsCamera();
-        echo '<br/>';
-        echo 'Is internet:' . $pc->getIsInternet();
-        echo '<br/>';
+    $form = $this->form;
+    $pc = $this->pc;
+    $url = $this->url('rooms', array('controller' => 'pc', 'action' => 'edit', 'id' => $this->pc->getId()));
+    $form->setAttribute('action', $url)->prepare();
 
-    }
+    echo $this->form()->openTag($form);
+
+    echo $this->title;
+
+    echo '<br/>';
+
+
+
+    echo $this->formRow($pc->get('title'));
+
+    echo '<br/>';
+
+    echo $this->formRow($pc->get('is_camera'));
+
+    echo '<br/>';
+
+    echo $this->formRow($pc->get('is_internet'));
+
+    echo '<br/>';
+
+    echo $this->formElement($form->get('submit'));
+
+    echo $this->form()->closeTag($form);
+
+}
+else{
     ?>
-</div>
-<div>
-    <?php
-    if($this->error){
-        echo $this->error;
-    }
-    ?>
-</div>
+    <div>
+        <h3><?php echo $this->error?></h3>
+    </div>
+<?php
+}

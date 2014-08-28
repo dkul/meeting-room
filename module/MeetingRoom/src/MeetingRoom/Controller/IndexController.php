@@ -19,9 +19,11 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->findAll();
+/*        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->findAll();*/
 
+        $pcGrid = $this->getServiceLocator()->get('MeetingRoom\Grid\MeetingRoom');
+        $listMeetingRoom = $pcGrid->getList();
         return array('listMeetingRoom' => $listMeetingRoom);
     }
 
