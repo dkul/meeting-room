@@ -57,7 +57,8 @@ return array(
     ),
     'service_manager' => array(
         'factories' => array(
-            'Model\MeetingRoomList' => function(){
+            'Model\MeetingRoomList' => function()
+            {
                 return new \MeetingRoom\Model\MeetingRoomList();
             }
         )
