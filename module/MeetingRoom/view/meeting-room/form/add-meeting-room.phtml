@@ -1,15 +1,40 @@
 <?php
-$form=$this->form;
+/*$form->setAttribute('action', $this->url('home'))
+    ->prepare();*/
+
+echo $this->form()->openTag($form);
+
+$pc = $form->get('pc');
+
+echo $this->formRow($pc->get('title'));
+echo $this->formRow($pc->get('is_internet'));
+echo $this->formCollection($pc->get('is_camera'));
+
+//$brand = $product->get('brand');
+
+/*echo $this->formRow($brand->get('name'));
+echo $this->formRow($brand->get('url'));
+
+echo $this->formHidden($form->get('csrf'));*/
+echo $this->formElement($form->get('submit'));
+
+echo $this->form()->closeTag();
+
+?>
+
+
+<?php
+/*$form=$this->form;
 $formLabel=$this->plugin('formLabel');
 
 echo $this->form()->openTag($form);
-?>
+*/?><!--
 
 <fieldset>
     <legend>
-        <?php echo $this->title;?>
+        <?php /*echo $this->title;*/?>
         <?php
-        $title=$form->get('title');
+/*        $title=$form->get('title');
         echo $formLabel->openTag().$title->getOption('label').$formLabel->closeTag();
         echo $this->formInput($title);
         echo $this->formElementErrors($title);
@@ -35,7 +60,7 @@ echo $this->form()->openTag($form);
 
 
 
-        ?>
+        */?>
     </legend>
 </fieldset>
-<?php echo $this->form()->closeTag($form);?>
+--><?php /*echo $this->form()->closeTag($form);*/?>

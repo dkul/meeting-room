@@ -9,6 +9,7 @@
 
 namespace MeetingRoom\Controller;
 
+use MeetingRoom\Form\PcFieldSet;
 use MeetingRoom\Model\MeetingRoomList;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -21,15 +22,42 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->findAll();
+        /*$entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->findAll();*/
+
+        $pcGrid=$this->getServiceLocator()->get('MeetingRoom\Grid\MeetingRoom');
+        $listMeetingRoom=$pcGrid->getList();
 
         return array('listMeetingRoom' => $listMeetingRoom);
     }
 
     public function addAction()
     {
-        $request=$this->getRequest();
+
+        $form = new PcForm();
+        $pc = new PC();
+        $form->bind($pc);
+
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+
+            if ($form->isValid()) {
+               $objectManager=$this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+               $objectManager->persist($form->getData());
+               $objectManager->flush();
+            }
+        }
+
+        $data=array(
+            'title'=>"Form",
+            'form'=>$form,
+        );
+
+        $view = new ViewModel($data);
+        $view->setTemplate('meeting-room/form/add-meeting-room');
+        return $view;
+
+       /* $request=$this->getRequest();
 
 
         $form = new PcForm();
@@ -50,7 +78,7 @@ class IndexController extends AbstractActionController
         );
         $view = new ViewModel($data);
         $view->setTemplate('meeting-room/form/add-meeting-room');
-        return $view;
+        return $view;*/
 
 
 

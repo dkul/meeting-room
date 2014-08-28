@@ -1,10 +1,16 @@
+<H2>
+    MeetingRoom list:
+</H2>
+
 <table class="table">
 
     <?php foreach($this->listItems as $pc){ ?>
     <tr>
         <td><?php echo $pc->getId(); ?></td>
         <td><?php echo $this->escapeHtml($pc->getTitle()); ?></td>
-        <td><a href='<?=$this->url('pcpc', array('action'=> 'edit', 'id'=> $pc->getId())); ?>'>Edit <?=$pc->getTitle()?></a></div></td>
+        <td><a href='<?=$this->url('pcpc', array('action'=> 'edit', 'id'=> $pc->getId())); ?>'>Edit <?=$pc->getTitle()?></a></td>
     </tr>
+
 <?php } ?>
 </table>
+<a href='<?=$this->url('pcpc', array('action'=> 'add', )); ?>'><H2>Add new computer</h2> </a>
