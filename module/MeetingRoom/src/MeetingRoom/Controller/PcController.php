@@ -9,6 +9,7 @@
 
 namespace MeetingRoom\Controller;
 
+
 use MeetingRoom\Form\PcForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -54,7 +55,7 @@ class PcController extends AbstractActionController
         $view = new ViewModel($data);
         $view->setTemplate('meeting-room/form/add-meeting-room');
         return $view;*/
-        $request = $this -> getRequest();
+        /*$request = $this -> getRequest();
 
         $form = new PcForm();
         $formInputFilter = new PcFilter();
@@ -76,8 +77,26 @@ class PcController extends AbstractActionController
         'form' => $form
         );
 
-        return $data;
+        return $data;*/
+
+
+        $form = new PcForm();
+        $pc = new PC();
+        $form->bind($pc);
+
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+
+            if ($form->isValid()) {
+                var_dump($pc);
+            }
+        }
+
+        return array(
+            'form' => $form
+        );
     }
+
 
     public function editAction()
     {
