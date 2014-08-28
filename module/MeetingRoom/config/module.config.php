@@ -7,8 +7,9 @@ return array(
             'rooms' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/room[/:action][/:id]',
+                    'route'    => '/room[/:controller][/:action][/:id]',
                     'constraints' => array(
+                        'controller'=>'[a-zA-Z][a-zA-Z0-9_-]*',
                         'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'         => '[0-9]*'
                     ),
@@ -60,6 +61,12 @@ return array(
             'Model\MeetingRoomList' => function()
             {
                 return new \MeetingRoom\Model\MeetingRoomList();
+            },
+            'Form\CreatePc'=>function(){
+                return new \MeetingRoom\Form\CreatePc();
+            },
+            'Entity\PC'=>function(){
+                return new \MeetingRoom\Entity\PC();
             }
         )
     ),

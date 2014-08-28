@@ -1,0 +1,12 @@
+<div>
+    <h3><?php echo $this->title?></h3>
+</div>
+<?php
+$form=$this->form;
+$url=$this->url('rooms',array('controller'=>'pc','action'=>'add'));
+$form->setAttribute('action', $url)->prepare();
+
+echo $this->partial(
+    'meeting-room/form/update-form',
+    array('form'=> $form)
+);

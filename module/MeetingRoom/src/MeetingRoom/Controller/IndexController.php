@@ -17,7 +17,6 @@ use MeetingRoom\Entity\PC;
 use MeetingRoom\Form\PcForm;
 use MeetingRoom\Form\PcFilter;
 
-
 class IndexController extends AbstractActionController
 {
     public function indexAction()
@@ -82,7 +81,7 @@ class IndexController extends AbstractActionController
 
     public function editAction()
     {
-        //параметр из route - id
+       /* //параметр из route - id
         $id = $this->params()->fromRoute('id');
         if(!empty($id)){
             $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
@@ -95,7 +94,32 @@ class IndexController extends AbstractActionController
 
         $view = new ViewModel($data);
         $view->setTemplate('meeting-room/form/edit-meeting-room');
-        return $view;
+        return $view;*/
+        /*$form = new CreatePc();
+        $pc = new PC();
+        $form->bind($pc);
+
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+            if ($form->isValid()) {
+                //var_dump($pc);
+                $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+                $entityManager->persist($pc);
+                $entityManager->flush();
+            }
+        }
+
+        $data = array(
+            'title' => 'Form',
+            'form' => $form
+        );
+        $view = new ViewModel($data);
+        $view->setTemplate('meeting-room/form/edit-meeting-room');
+        return $view;*/
+       // $id = $this->params()->fromRoute('id');
+
+       // $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+           // $pc = $this->getServiceLocator()->get('Entity\PC');
     }
 
     public function deleteAction()
@@ -111,6 +135,11 @@ class IndexController extends AbstractActionController
     }
 
     public function listAction(){
-
+        $listPc=$this->getEntity('\PC')->findAll();
+        return array('listPc' => $listPc);
+    }
+    public function getEntity($entity){
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        return $entityManager->getRepository('MeetingRoom\Entity'.$entity);
     }
 }

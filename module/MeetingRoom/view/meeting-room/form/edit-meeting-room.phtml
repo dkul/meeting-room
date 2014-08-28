@@ -1,6 +1,6 @@
 <?php
 /** @var \MeetingRoom\Entity\MeetingRoom $meetingRoom */
-$meetingRoom = $this->result;
+/*$meetingRoom = $this->result;
 ?>
 <div>
     <h1><?php echo $this->title; ?></h1>
@@ -25,4 +25,19 @@ $meetingRoom = $this->result;
         echo $this->error;
     }
     ?>
-</div>
+</div>*/
+
+$form=$this->form;
+
+echo $this->form()->openTag($form);
+$pc=$form->get('pc');
+echo $this->formRow($pc->get('title'));
+echo "<br/>";
+echo $this->formRow($pc->get('is_internet'));
+echo "<br/>";
+echo $this->formRow($pc->get('is_camera'));
+echo "<br/>";
+echo $this->formElement($form->get('submit'));
+
+echo $this->form()->closeTag();
+?>

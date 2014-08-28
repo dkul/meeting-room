@@ -3,12 +3,16 @@
  * Created by PhpStorm.
  * User: user
  * Date: 27.08.14
+<<<<<<< Updated upstream
  * Time: 11:06
+=======
+ * Time: 10:46
+>>>>>>> Stashed changes
  */
 
 namespace MeetingRoom\Controller;
 
-use MeetingRoom\Model\MeetingRoomList;
+/*use MeetingRoom\Model\MeetingRoomList;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use MeetingRoom\Entity\MeetingRoom as MeetingRoomEntity;
@@ -86,4 +90,84 @@ class PCController extends AbstractActionController
     public function listAction(){
 
     }
-}
+}*/
+
+use Doctrine\ORM\EntityManager;
+use MeetingRoom\Form\PcForm;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use MeetingRoom\Entity\PC ;
+
+
+class PcController extends AbstractActionController{
+    public function listAction(){
+
+        $listPc=$this->getEntity('\PC')->findAll();
+        return array('listPc' => $listPc);
+    }
+    public function editAction(){
+        //$form=new PcForm;
+        $id = $this->params()->fromRoute('id');
+
+
+        //if($pc=$this->getEntity('\PC')->find('id')){
+        $pc = new PC();
+            $form = $this->getServiceLocator()->get('Form\CreatePc');
+            $form->bind($pc);
+            if ($this->request->isPost()) {
+                $form->setData($this->request->getPost());
+                if ($form->isValid()) {
+                    $this->flushEntity($pc);
+                    return $this->redirect()->toRoute('rooms',array('controller'=>'pc','action'=>'list'));
+                }
+            }
+
+            return array(
+                'form'=>$form,
+                'pc'=>$pc
+
+
+            );
+        //}
+        return array(
+            'error'=>'Нет компьютера с указанным id.'
+        );
+
+
+
+    }
+    public  function addAction(){
+        $form = $this->getServiceLocator()->get('Form\CreatePc');
+        $pc = $this->getServiceLocator()->get('Entity\PC');
+        $form->bind($pc);
+
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+            if ($form->isValid()) {
+                $this->flushEntity($pc);
+                return $this->redirect()->toRoute('rooms',array('controller'=>'pc','action'=>'list'));
+            }
+        }
+
+        return array(
+            'form' => $form,
+            'title'=>'Добавление нового компьютера'
+        );
+    }
+
+    public  function deleteAction(){
+        return new ViewModel();
+    }
+    public function getEntity($entity){
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        return $entityManager->getRepository('MeetingRoom\Entity'.$entity);
+    }
+    public function flushEntity($entity){
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $entityManager->persist($entity);
+        $entityManager->flush();
+
+    }
+
+} 
+
