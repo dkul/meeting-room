@@ -1,6 +1,6 @@
 <?php
 namespace MeetingRoom;
-
+use Application\Mapper;
 return array(
     'router' => array(
         'routes' => array(
@@ -22,10 +22,10 @@ return array(
             'pc' => array(
                 'type' => 'Segment',
                 'options' => array(
-                    'route'    => '/room/pc[/:action][/:list]',
+                    'route'    => '/room/pc[/:action][/:id]',
                     'constraints' => array(
                         'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'list'         => '[a-zA-Z][a-zA-Z0-9_-]*'
+                        'id'         => '[0-9]*'
                     ),
                     'defaults' => array(
                         'controller' => 'MeetingRoom\Controller\PC',
@@ -61,7 +61,22 @@ return array(
         'factories' => array(
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
-            }
+
+            },
+
+            'MeetingRoom\Mapper\Pc'=>function($serviceManager)
+                {
+                    return new \MeetingRoom\Mapper\PCMapper(
+                        $serviceManager->get('Doctrine\ORM\EntityManager')
+                    );
+                },
+
+            'MeetingRoom\Grid\MeetingRoom'=>function($serviceManager)
+                {
+                    $grid=new \MeetingRoom\Model\MeetingRoomGrid();
+                    $grid->setEntityManager($serviceManager->get('Doctrine\ORM\EntityManager'));
+                    return $grid;
+                }
         )
     ),
     'doctrine' => array(

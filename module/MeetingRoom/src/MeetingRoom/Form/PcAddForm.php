@@ -12,8 +12,8 @@ use Zend\Form\Form;
 use Zend\InputFilter\InputFilter;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
-class PcForm extends Form{
-/*
+class PcAddForm extends Form{
+
     public function __construct()
 
     {
@@ -41,7 +41,7 @@ class PcForm extends Form{
                 'type'  => 'checkbox',
             ),
             'options' => array(
-                'label' => 'Is Internet',
+                'label' => 'isInternet',
             ),
         ));
 
@@ -51,7 +51,7 @@ class PcForm extends Form{
                 'type'  => 'checkbox',
             ),
             'options' => array(
-                'label' => 'Is Camera',
+                'label' => 'isCamera',
             ),
         ));
         $this->add(array(
@@ -66,34 +66,4 @@ class PcForm extends Form{
     }
 
 
-*/
-
-    public function __construct()
-    {
-        parent::__construct('pc');
-
-        $this->setAttribute('method', 'post')
-            ->setHydrator(new ClassMethodsHydrator(false))
-            ->setInputFilter(new InputFilter());
-
-        $this->add(array(
-            'type' => 'MeetingRoom\Form\PcFieldset',
-            'options' => array(
-                'use_as_base_fieldset' => true
-            )
-        ));
-
-        $this->add(array(
-            'type' => 'Zend\Form\Element\Csrf',
-            'name' => 'csrf'
-        ));
-
-        $this->add(array(
-            'name' => 'submit',
-            'attributes' => array(
-                'type' => 'submit',
-                'value' => 'Send'
-            )
-        ));
-    }
-} 
+}

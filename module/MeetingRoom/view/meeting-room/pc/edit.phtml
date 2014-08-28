@@ -1,0 +1,24 @@
+
+
+
+<?php
+$form->setAttribute('action', $this->url('pc', array('action'=>'edit')))
+    ->prepare();
+
+echo $this->form()->openTag($form);
+
+$pc = $form->get('pc');
+
+echo $this->formRow($pc->get('title')).'<br/>';
+
+echo $this->formRow($pc->get('isCamera')).'<br/>';
+
+echo $this->formRow($pc->get('isInternet')).'<br/>';
+
+
+
+echo $this->formHidden($form->get('csrf'));
+echo $this->formElement($form->get('submit'));
+
+echo $this->form()->closeTag();
+?>

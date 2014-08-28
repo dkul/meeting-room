@@ -1,0 +1,25 @@
+<table class="table">
+
+    <?php
+
+
+            foreach($this->listItems as $pc){ ?>
+            <tr>
+                <td><?php echo $pc->getId(); ?></td>
+                <td><?php echo $pc->getTitle(); ?></td>
+                <td><?php echo $pc->getIsCamera(); ?></td>
+                <td><?php echo $pc->getIsInternet(); ?></td>
+                <td><a href>Редактировать </a></td>
+
+            </tr>
+
+    <?php
+
+        } ?>
+
+
+
+
+</table>
+
+
