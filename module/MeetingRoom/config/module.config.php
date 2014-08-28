@@ -57,12 +57,22 @@ return array(
         )
     ),
     'service_manager' => array(
-        'factories' => array(
+        'factories' => [
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
-            }
-        )
-    ),
+            },
+            'MeetingRoom\Mapper\PC'=> function($serviceManager){ //
+                    return \MeetingRoom\Mapper\PcMapper(
+                        $serviceManager->get('Doctrine\ORM\EntityManager')
+                    );
+},
+            'MeetingRoom\Grid\MeetingRoom' => function($serviceManager)
+                {
+                    $grid = new \MeetingRoom\Model\MeetingRoomGrid();// делаем инстенс и передаем
+                    $grid->setEntityManager($serviceManager->get('Doctrine\ORM\EntityManager'));//подключаем доктрину и соединяем
+                    return $grid;
+                }
+        ] ),
     'doctrine' => array(
         'driver' => array(
             __NAMESPACE__ . '_driver' => array(

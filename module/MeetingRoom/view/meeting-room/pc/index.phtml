@@ -11,8 +11,11 @@
     foreach ($listPc as $key => $pc):?>
         <tr>
             <td><?php echo $pc->getTitle() . "<br/>";?></td>
+            <td><?php echo $pc->getIsCamera() . "<br/>";?></td>
+            <td><?php echo $pc->getIsInternet() . "<br/>";?></td>
+
         </tr>
-        <?php
+    <?php
     endforeach;
     ?>
 </table>
