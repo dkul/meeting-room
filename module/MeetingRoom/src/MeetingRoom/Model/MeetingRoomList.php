@@ -9,20 +9,19 @@
 namespace MeetingRoom\Model;
 
 
-class MeetingRoomList {
-
+class MeetingRoomList
+{
     private $list = array(
-        'title'=>"Hello, world!",
+        'title' => 'Hello Kitty!',
         'listItem' => array(
             0 => 'First title',
             1 => 'Second title',
             2 => 'Bla-bla title',
-            'test' =>'test title'
+            'test' => 'Test title'
         )
     );
 
     public function get(){
         return $this->list;
     }
-
 } 

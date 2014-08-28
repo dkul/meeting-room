@@ -1,0 +1,14 @@
+<?php
+/**@var MeetingRoom\Form\PcForm $form*/
+$form=$this->form;
+echo $this->form()->openTag($form);
+$pc=$form->get('pc');
+echo $this->formRow($pc->get('title'));
+echo "<br/>";
+echo $this->formRow($pc->get('is_internet'));
+echo "<br/>";
+echo $this->formRow($pc->get('is_camera'));
+echo "<br/>";
+echo $this->formElement($form->get('submit'));
+echo $this->form()->closeTag();
+?>

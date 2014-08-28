@@ -22,7 +22,7 @@ class Module
 
         $config = $e->getApplication()->getServiceManager()->get('config');
         if(!empty($config['phpSettings'])) {
-            foreach($config['phpSetting'] as $key => $value) {
+            foreach($config['phpSettings'] as $key => $value) {
                 ini_set($key, $value);
             }
         }

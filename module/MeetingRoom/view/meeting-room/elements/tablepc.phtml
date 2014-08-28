@@ -1,0 +1,9 @@
+<table class="table">
+    <?php foreach($this->listItems as $pc){ ?>
+        <tr>
+            <td><?php echo $pc->getId(); ?></td>
+            <td><?php echo $this->escapeHtml($pc->getTitle()); ?></td>
+            <td><a href='<?=$this->url('meetingroom', array('action'=> 'edit', 'id' => $pc->getId())); ?>'>Edit PC</a></td>
+        </tr>
+    <?php } ?>
+</table>

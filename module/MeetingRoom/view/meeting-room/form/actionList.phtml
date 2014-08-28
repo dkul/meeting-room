@@ -1,0 +1,13 @@
+<div>
+    <h1>
+        <?php echo $this->id; ?> <br>
+        <?php echo $this->title; ?> <br>
+    </h1>
+
+    <?php
+    echo $this->partial(
+        'meeting-room/elements/table',
+        array('description' => $this->description)
+    );
+    ?>
+</div>

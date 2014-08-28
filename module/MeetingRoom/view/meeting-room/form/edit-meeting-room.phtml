@@ -5,18 +5,18 @@ $meetingRoom = $this->result;
 <div>
     <h1><?php echo $this->title; ?></h1>
     <?php
-    if($meetingRoom){
-        echo 'Title: ' . $meetingRoom->getTitle();
-        echo '<br/>';
-        echo 'Place: ' . $meetingRoom->getPlace();
-        echo '<br/>';
-
-        if($meetingRoom->getPc()){
-            echo 'Title PC:' . $meetingRoom->getPc()->getTitle();
+        if($meetingRoom){
+            echo 'Title: ' . $meetingRoom->getTitle();
             echo '<br/>';
-            echo 'Is camera:' . $meetingRoom->getPc()->getIsCamera();
+            echo 'Place: ' . $meetingRoom->getPlace();
+            echo '<br/>';
+
+            if($meetingRoom->getPc()){
+                echo 'Title PC:' . $meetingRoom->getPc()->getTitle();
+                echo '<br/>';
+                echo 'Is camera:' . $meetingRoom->getPc()->getIsCamera();
+            }
         }
-    }
     ?>
 </div>
 <div>

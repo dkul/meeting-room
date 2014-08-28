@@ -1,0 +1,24 @@
+<div class="header row">
+    <div class="col-sm-3">Название</div>
+    <div class="col-sm-3">Наличие камеры</div>
+    <div class="col-sm-3">Наличие интернета</div>
+    <div class="col-sm-3"></div>
+</div>
+<?php
+/**@var MeetingRoom\Entity\PC $pc*/
+foreach($this->listPc as $key=>$pc):?>
+    <div class="row table">
+        <div class="title col-sm-3"><?php echo $pc->getTitle()?></div>
+        <div class="camera col-sm-3"><?php
+            if($pc->getIsCamera()==null) echo 'No';
+            else echo 'Yes';
+            ?>
+        </div>
+        <div class="internet col-sm-3"><?php
+            if($pc->getIsInternet()==null) echo 'No';
+            else echo 'Yes';
+            ?>
+        </div>
+        <div class="ref col-sm-3"><a class="btn btn-link" href="http://master-class.local/meetingroom/pc/edit/<?php echo $pc->getId();?>">Редактировать</a></div>
+    </div>
+<?php endforeach;?>
