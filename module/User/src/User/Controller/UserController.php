@@ -11,7 +11,6 @@ namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Zend\Debug\Debug;
 
 class UserController extends AbstractActionController
 {
@@ -19,7 +18,6 @@ class UserController extends AbstractActionController
     {
         return new ViewModel();
     }
-
     public function addAction()
     {
         return new ViewModel();

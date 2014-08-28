@@ -1,4 +1,42 @@
-<div>
-    <h1><?php echo $this->title; ?></h1>
-</div>
-<div>New meeting room id: <?php echo $this->meeting_room_id; ?></div>
+<?php
+/**
+ * @var \Zend\Form\Form $form
+ */
+$form = $this->form;
+
+$formLabel = $this->plugin('formLabel');
+?>
+
+
+<?php echo $this->form()->openTag($form); ?>
+    <fieldset>
+        <legend><?php echo $this->title; ?></legend>
+        <?php
+
+        $title=$form->get('title');
+        echo $formLabel->openTag().$title->getOption('label').$formLabel->closeTag();
+        echo $this->formInput($title);
+        echo $this->formElementErrors($title);
+
+        echo '<br/>';
+
+        $isCamera=$form->get('is_camera');
+        echo $formLabel->openTag().$isCamera->getOption('label').$formLabel->closeTag();
+        echo $this->formInput($isCamera);
+        echo $this->formElementErrors($isCamera);
+
+        echo '<br/>';
+
+        $isInternet=$form->get('is_internet');
+        echo $formLabel->openTag().$isInternet->getOption('label').$formLabel->closeTag();
+        echo $this->formInput($isInternet);
+        echo $this->formElementErrors($isInternet);
+
+        echo '<br/>';
+
+        $submit=$form->get('submit');
+        echo '<br/>'.$this->formInput($submit);
+
+        ?>
+    </fieldset>
+<?php echo $this->form()->closeTag($form); ?>

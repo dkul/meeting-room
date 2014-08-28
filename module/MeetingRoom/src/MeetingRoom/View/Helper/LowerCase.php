@@ -12,8 +12,7 @@ use Zend\View\Helper\AbstractHelper;
 
 class LowerCase extends AbstractHelper
 {
-    public function __invoke($string)
-    {
+    public function __invoke($string) {
         return strtolower($string);
     }
 } 
