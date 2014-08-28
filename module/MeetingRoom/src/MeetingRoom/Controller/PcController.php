@@ -14,7 +14,7 @@ use MeetingRoom\Form\PcForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use MeetingRoom\Entity\PC;
-use MeetingRoom\Form\PcFilter;
+
 
 
 class PcController extends AbstractActionController
@@ -79,6 +79,7 @@ class PcController extends AbstractActionController
 
         return $data;*/
 
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
         $form = new PcForm();
         $pc = new PC();
@@ -89,6 +90,8 @@ class PcController extends AbstractActionController
 
             if ($form->isValid()) {
                 var_dump($pc);
+                $entityManager->persist($pc);
+                $entityManager->flush($pc);
             }
         }
 
