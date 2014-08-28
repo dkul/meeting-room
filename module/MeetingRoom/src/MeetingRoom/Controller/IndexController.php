@@ -22,39 +22,42 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->findAll();
-
-        return array('listMeetingRoom' => $listMeetingRoom);
+//        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+//        $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->findAll();
+//
+//        return array('listMeetingRoom' => $listMeetingRoom);
+        $pcGrid = $this->getServiceLocator()->get('MeetingRoom\Grid\MeetingRoom');
+        $listMeetingRoom = $pcGrid->getList();
+        return array('listMeetingRoom' =>$listMeetingRoom);
     }
 
     public function addAction()
     {
-//        $data = array(
-//            'title' => 'Form add meeting room!!!'
-//        );
-//
-//        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-//
-//        $pc = new PC();
-//        $pc->setTitle('PC-234');
-//
-//        $entityManager->persist($pc);
-//
-//        $meetingRoom = new MeetingRoomEntity();
-//        $meetingRoom->setTitle('Альфа3');
-//        $meetingRoom->setPlace('3 этаж, 103');
-//        $meetingRoom->setCapacity(3);
-//        $meetingRoom->setPc($pc);
-//
-//        $entityManager->persist($meetingRoom);
-//        $entityManager->flush();
-//
-//        $data['meeting_room_id'] = $meetingRoom->getId();
-//
-//        $view = new ViewModel($data);
-//        $view->setTemplate('meeting-room/form/add-meeting-room');
-//        return $view;
+        $data = array(
+            'title' => 'Form add meeting room!!!'
+        );
+
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+
+        $pc = new PC();
+        $pc->setTitle('PC-234');
+
+        $entityManager->persist($pc);
+
+        $meetingRoom = new MeetingRoomEntity();
+        $meetingRoom->setTitle('Альфа3');
+        $meetingRoom->setPlace('3 этаж, 103');
+        $meetingRoom->setCapacity(3);
+        $meetingRoom->setPc($pc);
+
+        $entityManager->persist($meetingRoom);
+        $entityManager->flush();
+
+        $data['meeting_room_id'] = $meetingRoom->getId();
+
+        $view = new ViewModel($data);
+        $view->setTemplate('meeting-room/form/add-meeting-room');
+        return $view;
         $request = $this->getRequest();
 
         $form = new PcForm();

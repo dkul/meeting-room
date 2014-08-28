@@ -1,64 +1,33 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 27.08.14
- * Time: 11:07
- */
 
-namespace MeetingRoom;
+namespace MeetingRoom\Controller;
 
-use MeetingRoom\Model\MeetingRoomList;
+use Doctrine\ORM\EntityManager;
+use MeetingRoom\Form\PcForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use MeetingRoom\Entity\MeetingRoom as MeetingRoomEntity;
-use MeetingRoom\Entity\PC;
-class PCController extends AbstractActionController
-{
+use MeetingRoom\Entity\PC ;
+
+
+class PcController extends AbstractActionController{
     public function indexAction()
     {
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-        $listMeetingRoom = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->findAll();
+        $listPC = $entityManager->getRepository('MeetingRoom\Entity\PC')->findAll();
 
-        return array('listMeetingRoom' => $listMeetingRoom);
+        return array('listPC' => $listPC);
     }
+    public function listAction(){
 
-    public function addAction()
-    {
-        $data = array(
-            'title' => 'Form add meeting room!!!'
-        );
-
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-
-        $pc = new PC();
-        $pc->setTitle('PC-235');
-
-        $entityManager->persist($pc);
-
-        $meetingRoom = new MeetingRoomEntity();
-        $meetingRoom->setTitle('Альфа3');
-        $meetingRoom->setPlace('3 этаж, 103');
-        $meetingRoom->setCapacity(3);
-        $meetingRoom->setPc($pc);
-
-        $entityManager->persist($meetingRoom);
-        $entityManager->flush();
-
-        $data['meeting_room_id'] = $meetingRoom->getId();
-
-        $view = new ViewModel($data);
-        $view->setTemplate('meeting-room/form/add-meeting-room');
-        return $view;
+        $listPc=$this->getEntity('\PC')->findAll();
+        return array('listPc' => $listPc);
     }
-
-    public function editAction()
-    {
-        //параметр из route - id
+    public function editAction(){
+        //$form=new PcForm;
         $id = $this->params()->fromRoute('id');
         if(!empty($id)){
             $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
-            $result = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->find($id);
+            $result = $entityManager->getRepository('MeetingRoom\Entity\PC')->find($id);
 
             $data = array('result' => $result);
         }else{
@@ -66,23 +35,40 @@ class PCController extends AbstractActionController
         }
 
         $view = new ViewModel($data);
-        $view->setTemplate('meeting-room/form/edit-meeting-room');
+        $view->setTemplate('meeting-room/form/edit-pc');
         return $view;
     }
+    public  function addAction(){
+        $request = $this->getRequest();
+        $form = new PcForm();
 
-    public function deleteAction()
-    {
-        $view = new ViewModel(
-            array(
-                'title' => 'Delete action'
-            )
+        if ($request->isPost()) {
+            $form->setData($request->getPost());
+            if ($form->isValid()) {
+                $objectManager = $this->getServiceLocator()->get(Doctrine\ORM\EntityManager);
+                $objectManager->persist($form->getData());
+                $objectManager->flush();
+            }
+        }
+
+        return array(
+            'title'=>'form create pc',
+            'form' => $form
         );
-        $view->setTemplate('meeting-room/form/edit-meeting-room');
-        $view->setTerminal(true);
-        return $view;
     }
 
-    public function listAction(){
+    public  function deleteAction(){
+        return new ViewModel();
+    }
+    public function getEntity($entity){
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        return $entityManager->getRepository('MeetingRoom\Entity'.$entity);
+    }
+    public function flushEntity($entity){
+        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        $entityManager->persist($entity);
+        $entityManager->flush();
 
     }
-} 
+
+}

@@ -1,60 +1,38 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: user
+ * User: helen
  * Date: 27.08.14
- * Time: 13:09
+ * Time: 19:31
  */
-
 namespace MeetingRoom\Form;
 
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilter;
+use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
+
 class PcForm extends Form{
-    public function __construct($name = null)
+
+    public function __construct()
     {
-        // we want to ignore the name passed
-        parent::__construct('PcForm');
-        $this->setAttribute('method', 'post');
+        parent::__construct('create_pc');
+        $this->setAttribute('method', 'post')
+            ->setHydrator(new ClassMethodsHydrator(false))
+            ->setInputFilter(new InputFilter());
+
         $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
-                'type'  => 'hidden',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'title',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
+            'type' => 'MeetingRoom\Form\PcFilter',
             'options' => array(
-                'label' => 'Title',
-            ),
+                'use_as_base_filter' => true
+            )
         ));
-        $this->add(array(
-            'name' => 'is_camera',
-            'attributes' => array(
-                'type'  => 'checkbox',
-            ),
-            'options' => array(
-                'label' => 'IsCamera',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'is_internet',
-            'attributes' => array(
-                'type'  => 'checkbox',
-            ),
-            'options' => array(
-                'label' => 'IsInternet',
-            ),
-        ));
+
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
-                'type'  => 'submit',
-                'value' => 'Save',
-                'id' => 'submitbutton',
-            ),
+                'type' => 'submit',
+                'value' => 'Save/Update'
+            )
         ));
     }
 } 

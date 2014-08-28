@@ -1,0 +1,22 @@
+<?php
+/** @var \MeetingRoom\Entity\MeetingRoom $meetingRoom */
+$meetingRoom = $this->result;
+?>
+<div>
+    <h1><?php echo $this->title; ?></h1>
+    <?php
+    if($meetingRoom){
+        echo 'Title: ' . $meetingRoom->getTitle();
+        echo '<br/>';
+
+
+    }
+    ?>
+</div>
+<div>
+    <?php
+    if($this->error){
+        echo $this->error;
+    }
+    ?>
+</div>
