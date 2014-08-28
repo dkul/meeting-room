@@ -21,6 +21,10 @@ class PcController extends AbstractActionController
 {
     public function indexAction()
     {
+       /* $pcGrid = $this->getServiceLocator()->get('MeetingRoom\Grid\MeetingRoom');
+        $listMeetingRoom = $pcGrid->getList();
+        return array('listMeetingRoom' => $listMeetingRoom);*/
+
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $listPc = $entityManager->getRepository('MeetingRoom\Entity\PC')->findAll();
 

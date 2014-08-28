@@ -61,7 +61,19 @@ return array(
         'factories' => array(
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
-            }
+            },
+            'MeetingRoom\Mapper\PC' => function($serviceManager)
+                {
+                    return \MeetingRoom\Mapper\PcMapper(
+                        $serviceManager->get('Doctrine\ORM\EntityManager')
+                    );
+                },
+            'MeetingRoom\Grid\MeetingRoom' => function($serviceManager){
+
+                    $grid = new \MeetingRoom\Model\MeetingRoomGrid();
+                    $grid->setEntityManager($serviceManager->get('Doctrine\ORM\EntityManager'));
+                    return $grid;
+                }
         )
     ),
     'doctrine' => array(
