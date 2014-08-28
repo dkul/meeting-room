@@ -81,8 +81,13 @@ use MeetingRoom\Entity\PC ;
 
 class PCController extends AbstractActionController{
     public function listAction(){
-        $listPc=$this->getEntity('\PC')->findAll();
-        return array('listPc' => $listPc);
+
+        /**
+         * @var \MeetingRoom\Mapper\PcMapper $pcMapper
+         */
+        $pcMapper= $this->getServiceLocator()->get('MeetingRoom\Mapper\PC');
+        return array('listMeetingRoom' => $pcMapper->getList());
+
     }
     public function editAction(){
 //$form=new PcForm;

@@ -56,6 +56,19 @@ return array(
             'Entity\PC'=>function(){
                     return new \MeetingRoom\Entity\PC();
                 },
+            'MeetingRoom\Mapper\PC' =>function($serviceManager){
+
+                    return new \MeetingRoom\Mapper\PCMapper(
+                        $serviceManager->get('Doctrine\ORM\EntityManager')
+                    );
+
+                },
+            'MeetingRoom\Grid\MeetingRoom'=>function($serviceManager)
+                {
+                    $grid=new \MeetingRoom\Model\MeetingRoomGrid();
+                    $grid->setEntityManager($serviceManager->get('Doctrine\ORM\EntityManager'));
+                    return $grid;
+                }
         )
     ),
     'doctrine' => array(
