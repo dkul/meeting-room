@@ -61,8 +61,8 @@ return array(
             'translator' => 'MvcTranslator',
         ),
     ),
-    'translator' => array(
-        'locale' => 'en_US',
+    /*'translator' => array(
+        'locale' => 'ru_RU',
         'translation_file_patterns' => array(
             array(
                 'type'     => 'gettext',
@@ -70,7 +70,7 @@ return array(
                 'pattern'  => '%s.mo',
             ),
         ),
-    ),
+    ),*/
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController'

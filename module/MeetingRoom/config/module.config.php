@@ -17,12 +17,27 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+            ),
+            'pc' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/pc[/:action][/:id]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'         => '[0-9]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'MeetingRoom\Controller\Pc',
+                        'action'     => 'index',
+                    ),
+                ),
             )
         ),
     ),
     'controllers' => array(
         'invokables' => array(
-            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController'
+            'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController',
+            'MeetingRoom\Controller\Pc'    => 'MeetingRoom\Controller\PcController'
         ),
     ),
     'view_manager' => array(
@@ -44,6 +59,15 @@ return array(
         'factories' => array(
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
+            },
+            'MeetingRoom\Form\Pc' => function(){
+                return new \MeetingRoom\Form\PcForm();
+            },
+            'MeetingRoom\Form\MeetingRoom' => function(){
+                return new \MeetingRoom\Form\MeetingRoomForm();
+            },
+            'MeetingRoom\Mapper\Pc' => function($serviceManager){
+                return new \MeetingRoom\Mapper\PcMapper($serviceManager->get('Doctrine\ORM\EntityManager'));
             }
         )
     ),
@@ -60,5 +84,15 @@ return array(
                 ),
             ),
         ),
-    )
+    ),
+    'translator' => array(
+        'locale' => 'ru',
+        'translation_file_patterns' => array(
+            array(
+                'type' => 'phparray',
+                'base_dir' => __DIR__ . '/../language',
+                'pattern' => 'lang.array.%s.php',
+            ),
+        ),
+    ),
 );

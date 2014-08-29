@@ -180,3 +180,6 @@ msgstr "разрешает для %s"
 #: ../view/error/404.phtml:51
 msgid "Exception"
 msgstr "Исключение"
+
+msgid "Title"
+msgstr "Название"

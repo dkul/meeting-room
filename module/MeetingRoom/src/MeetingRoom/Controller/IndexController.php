@@ -27,30 +27,21 @@ class IndexController extends AbstractActionController
 
     public function addAction()
     {
-        $data = array(
-            'title' => 'Form add meeting room!!!'
-        );
+        $mrForm   = $this->getServiceLocator()->get('MeetingRoom\Form\MeetingRoom');
 
-        $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        if($this->request->isPost()){
+            $mrForm->setData($this->request->getPost());
+            if($mrForm->isValid()){
+                var_dump($mrForm->getData());
+                //$mrForm->save($pcForm->getData());
+                //$this->redirect()->toRoute('pc', array('action' => 'list'));
+            }
+        }
 
-        $pc = new PC();
-        $pc->setTitle('PC-234');
-
-        $entityManager->persist($pc);
-
-        $meetingRoom = new MeetingRoomEntity();
-        $meetingRoom->setTitle('Альфа3');
-        $meetingRoom->setPlace('3 этаж, 103');
-        $meetingRoom->setCapacity(3);
-        $meetingRoom->setPc($pc);
-
-        $entityManager->persist($meetingRoom);
-        $entityManager->flush();
-
-        $data['meeting_room_id'] = $meetingRoom->getId();
-
-        $view = new ViewModel($data);
-        $view->setTemplate('meeting-room/form/add-meeting-room');
+        $view = new ViewModel(array(
+            'form' => $mrForm
+        ));
+        $view->setTemplate('meeting-room/form/mr-form');
         return $view;
     }
 

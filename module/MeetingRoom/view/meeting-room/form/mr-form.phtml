@@ -1,0 +1,47 @@
+<?php
+
+$mrForm = $this->form;
+$mrForm->prepare();
+
+$formLabel = $this->plugin('formLabel');
+$mrFieldset = $mrForm->get('mr_fieldset');
+?>
+
+<?php echo $this->form()->openTag($mrForm); ?>
+    <fieldset>
+        <legend>Add PC</legend>
+        <div class="form-group">
+           <?php
+                $title = $mrFieldset->get('title');
+                $title->setAttribute('class','form-control');
+                echo $formLabel->openTag() . $this->translate($title->getOption('label')) . $formLabel->closeTag();
+                echo $this->formInput($title);
+                echo $this->formElementErrors($title);
+           ?>
+        </div>
+        <div class="form-group">
+            <?php
+            $title = $mrFieldset->get('place');
+            $title->setAttribute('class','form-control');
+            echo $formLabel->openTag() . $this->translate($title->getOption('label')) . $formLabel->closeTag();
+            echo $this->formInput($title);
+            echo $this->formElementErrors($title);
+            ?>
+        </div>
+        <div class="form-group">
+            <?php
+            $title = $mrFieldset->get('capacity');
+            $title->setAttribute('class','form-control');
+            echo $formLabel->openTag() . $this->translate($title->getOption('label')) . $formLabel->closeTag();
+            echo $this->formInput($title);
+            echo $this->formElementErrors($title);
+            ?>
+        </div>
+        <?php
+        $submit = $mrForm->get('submit');
+        $submit->setAttribute('class', 'btn btn-primary');
+        echo $this->formElement($submit);
+        ?>
+    </fieldset>
+<?php echo $this->form()->closeTag(); ?>
+

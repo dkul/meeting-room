@@ -1,0 +1,35 @@
+<?php
+
+$pcForm = $this->form;
+$pcForm->prepare();
+
+$formLabel = $this->plugin('formLabel');
+$pcFieldset = $pcForm->get('pc_fieldset');
+?>
+
+<?php echo $this->form()->openTag($pcForm); ?>
+    <fieldset>
+        <legend>Add PC</legend>
+        <div class="form-group">
+           <?php
+                $title = $pcFieldset->get('title');
+                $title->setAttribute('class','form-control');
+                echo $formLabel->openTag() . $this->translate($title->getOption('label')) . $formLabel->closeTag();
+                echo $this->formInput($title);
+                echo $this->formElementErrors($title);
+           ?>
+        </div>
+        <div class="checkbox">
+            <?php echo $this->formRow($pcFieldset->get('is_camera')); ?>
+        </div>
+        <div class="checkbox">
+            <?php echo $this->formRow($pcFieldset->get('is_internet')); ?>
+        </div>
+        <?php
+        $submit = $pcForm->get('submit');
+        $submit->setAttribute('class', 'btn btn-primary');
+        echo $this->formElement($submit);
+        ?>
+    </fieldset>
+<?php echo $this->form()->closeTag(); ?>
+

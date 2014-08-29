@@ -10,15 +10,15 @@ namespace MeetingRoom\Form;
 
 use Zend\Form\Form;
 
-class PcForm extends Form
+class MeetingRoomForm extends Form
 {
     public function __construct()
     {
-        parent::__construct('pc');
+        parent::__construct('mr');
         $this->setAttribute('method', 'post');
 
         $this->add(array(
-            'type' => 'MeetingRoom\Form\PcFieldset',
+            'type' => 'MeetingRoom\Form\MeetingRoomFieldset',
             'options' => array(
                 'use_as_base_fieldset' => true
             )
