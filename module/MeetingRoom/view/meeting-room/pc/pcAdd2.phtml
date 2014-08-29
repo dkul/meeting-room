@@ -1,0 +1,63 @@
+<?php
+/**@var MeetingRoom\Entity\PC $pc*/
+foreach($this->listPC as $key=>$pc):?>
+    <div class="row table">
+        <div class="title col-sm-3"><?php echo $pc->getTitle()?></div>
+        <div class="camera col-sm-3"><?php
+            if($pc->getIsCamera()==null) echo 'No';
+            else echo 'Yes';
+            ?>
+        </div>
+        <div class="internet col-sm-3"><?php
+            if($pc->getIsInternet()==null) echo 'No';
+            else echo 'Yes';
+            ?>
+        </div>
+        <div class="ref col-sm-3"><a class="btn btn-link" href="http://master-class.local/room/pc/edit/<?php echo $pc->getId();?>">Редактировать</a></div>
+    </div>
+
+<?php endforeach;?>
+
+<?php
+/*
+echo "<pre>";
+var_dump($data);
+
+$data->setAttribute('action', $this->url('home'))
+     ->prepare();
+
+echo $this->form()->openTag($data);
+
+$product = $data->get('pc');
+
+echo $this->formRow($pc->get('title'));
+echo $this->formRow($pc->get('is_camera'));
+echo $this->formCollection($pc->get('is_internet'));
+
+echo $this->formHidden($data->get('csrf'));
+echo $this->formElement($data->get('submit'));
+
+echo $this->form()->closeTag();
+
+/*$form->setAttribute('action', $this->url('home'))->prepare();
+
+echo $this->form()->openTag($form);
+
+$product = $form->get('pc');
+
+echo $this->formRow($product->get('title'));
+echo $this->formRow($product->get('is_camera'));
+echo $this->formRow($product->get('is_internet'));
+echo $this->formCollection($product->get('categories'));
+
+$brand = $product->get('brand');
+
+echo $this->formRow($brand->get('name'));
+echo $this->formRow($brand->get('url'));
+
+echo $this->formHidden($form->get('csrf'));
+echo $this->formElement($form->get('submit'));
+
+echo $this->form()->closeTag();
+*/
+?>

@@ -9,54 +9,38 @@
 namespace MeetingRoom\Form;
 
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilter;
+use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
 class PCForm extends Form
 {
-    public function __construct($name = null)
+    public function __construct()
     {
         // we want to ignore the name passed
         parent::__construct('pc');
-        $this->setAttribute('method', 'post');
+
+        $this->setAttribute('method', 'post')
+             ->setHydrator(new ClassMethodsHydrator(false))
+             ->setInputFilter(new InputFilter());
+
         $this->add(array(
-            'name' => 'id',
-            'attributes' => array(
-                'type'  => 'hidden',
-            ),
-        ));
-        $this->add(array(
-            'name' => 'title',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
+            'type' => 'MeetingRoom\Form\PCFieldset',
             'options' => array(
-                'label' => 'Title',
-            ),
+                'use_as_base_fieldset' => true
+            )
         ));
+
         $this->add(array(
-            'name' => 'is_camera',
-            'attributes' => array(
-                'type'  => 'checkbox',
-            ),
-            'options' => array(
-                'label' => 'Is_camera',
-            ),
+            'type' => 'Zend\Form\Element\Csrf',
+            'name' => 'csrf'
         ));
-        $this->add(array(
-            'name' => 'is_internet',
-            'attributes' => array(
-                'type'  => 'checkbox',
-            ),
-            'options' => array(
-                'label' => 'Is_internet',
-            ),
-        ));
+
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(
-                'type'  => 'submit',
-                'value' => 'Write',
-                'id' => 'submitbutton',
-            ),
+                'type' => 'submit',
+                'value' => 'Send'
+            )
         ));
     }
 } 

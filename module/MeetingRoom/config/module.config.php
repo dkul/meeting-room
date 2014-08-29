@@ -60,7 +60,13 @@ return array(
         'factories' => array(
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
-            }
+            },
+            'MeetingRoom\Mapper\PC' => function($serviceManager)
+            {
+                return new \MeetingRoom\Mapper\PCMapper(
+                    $serviceManager -> get ('Doctrine\ORM\EntityManager')
+                );
+            },
         )
     ),
     'doctrine' => array(

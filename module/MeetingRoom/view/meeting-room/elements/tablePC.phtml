@@ -4,6 +4,7 @@
         <td>Title</td>
         <td>Camera</td>
         <td>Internet</td>
+        <td>Edit PC</td>
     </tr>
     <?php foreach($this->listItems as $pc){ ?>
         <tr>
@@ -11,6 +12,7 @@
             <td><?php echo $this->escapeHtml($pc->getTitle()); ?></td>
             <td><?php echo $pc->getIsCamera(); ?></td>
             <td><?php echo $pc->getIsInternet(); ?></td>
+            <td><a href="#">Edit</a></td>
         </tr>
     <?php } ?>
 </table>

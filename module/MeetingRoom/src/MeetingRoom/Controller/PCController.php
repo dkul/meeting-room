@@ -29,6 +29,7 @@ class PCController extends AbstractActionController{
 
     public function addAction()
     {
+        /*
         $request = $this->getRequest();
 
         $form = new PCForm();
@@ -47,11 +48,23 @@ class PCController extends AbstractActionController{
             'form' => $form,
             'title' => "Add Title",
         );
+        */
 
-        $view = new ViewModel($data);
-        $view->setTemplate('meeting-room/pc/pcAdd');
+        $form = new PCForm();
+        $pc = new PC();
+        $form->bind($pc);
+
+        if ($this->request->isPost()) {
+            $form->setData($this->request->getPost());
+            if ($form->isValid()) {
+                $this->flushEntity($pc);
+            }
+        }
+
+
+        $view = new ViewModel(array('data' => $form));
+        $view->setTemplate('meeting-room/pc/pcAdd2');
         return $view;
-
     }
 
     public function editAction()
@@ -61,10 +74,15 @@ class PCController extends AbstractActionController{
 
     public function listAction()
     {
+        /** @var \MeetingRoom\Mapper\PCMapper $pcMapper */
+        $pcMapper = $this->getServiceLocator()->get('MeetingRoom\Mapper\PC');
+
+
+
         $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $listPC = $entityManager->getRepository('MeetingRoom\Entity\PC')->findAll();
 
-        $view = new ViewModel($data = array('listPC' => $listPC));
+        $view = new ViewModel($data = array('listPC' => $listPC, 'title' => "List PC"));
         $view->setTemplate('meeting-room/pc/pcList');
         return $view;
 
