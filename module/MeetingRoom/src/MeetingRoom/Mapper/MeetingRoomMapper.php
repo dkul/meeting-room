@@ -8,7 +8,7 @@
 
 namespace MeetingRoom\Mapper;
 
-use Application\Mapper\AbstractMapper;
+use Base\Mapper\AbstractMapper;
 use Doctrine\ORM\EntityManager;
 
 class MeetingRoomMapper extends AbstractMapper
