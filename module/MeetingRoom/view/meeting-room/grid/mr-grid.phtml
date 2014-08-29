@@ -1,0 +1,19 @@
+<table class="table">
+    <thead>
+        <th><?php echo $this->translate('Title'); ?></th>
+        <th><?php echo $this->translate('Place'); ?></th>
+        <th><?php echo $this->translate('Capacity'); ?></th>
+        <th><?php echo $this->translate('Action'); ?></th>
+    </thead>
+    <?php foreach($this->listMR as $meetingRoom){ ?>
+        <tr>
+            <td><?php echo $meetingRoom->getTitle(); ?></td>
+            <td><?php echo $meetingRoom->getPlace(); ?></td>
+            <td><?php echo $meetingRoom->getCapacity(); ?></td>
+            <td></td>
+            <td>
+                <a href="<?php echo $this->url('rooms', array('action' => 'edit', 'id' => $meetingRoom->getId())); ?>"><?php echo $this->translate('Edit'); ?></a>
+            </td>
+        <tr>
+    <?php } ?>
+</table>

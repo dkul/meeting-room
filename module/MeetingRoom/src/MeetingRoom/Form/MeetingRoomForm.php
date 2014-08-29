@@ -8,21 +8,22 @@
 
 namespace MeetingRoom\Form;
 
+use Doctrine\ORM\EntityManager;
 use Zend\Form\Form;
+use MeetingRoom\Form\MeetingRoomFieldset;
 
 class MeetingRoomForm extends Form
 {
-    public function __construct()
+    public function __construct(EntityManager $em)
     {
         parent::__construct('mr');
         $this->setAttribute('method', 'post');
 
-        $this->add(array(
-            'type' => 'MeetingRoom\Form\MeetingRoomFieldset',
-            'options' => array(
-                'use_as_base_fieldset' => true
-            )
+        $meetingRoomFieldset = new MeetingRoomFieldset($em);
+        $meetingRoomFieldset->setOptions(array(
+            'use_as_base_fieldset' => true
         ));
+        $this->add($meetingRoomFieldset);
 
         $this->add(array(
             'name' => 'submit',

@@ -37,6 +37,15 @@ $mrFieldset = $mrForm->get('mr_fieldset');
             echo $this->formElementErrors($title);
             ?>
         </div>
+        <div class="form-group">
+            <?php
+            $title = $mrFieldset->get('pc_id');
+            $title->setAttribute('class','form-control');
+            echo $formLabel->openTag() . $this->translate($title->getOption('label')) . $formLabel->closeTag();
+            echo $this->formSelect($title);
+            echo $this->formElementErrors($title);
+            ?>
+        </div>
         <?php
         $submit = $mrForm->get('submit');
         $submit->setAttribute('class', 'btn btn-primary');

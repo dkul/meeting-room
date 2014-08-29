@@ -1,9 +1,7 @@
-<div class="jumbotron">
-    <h1><?php echo $this->mylowercase($this->title); ?></h1>
-    <a href='<?=$this->url('rooms', array('action'=> 'edit', 'id' => 2)); ?>'>Edit room</a></div>
 <?php
+$listMr = $this->listMeetingRoom;
 echo $this->partial(
-        'meeting-room/elements/table',
-         array('listItems' => $this->listMeetingRoom)
+        'meeting-room/grid/mr-grid',
+         array('listMR' => $listMr)
      );
 ?>

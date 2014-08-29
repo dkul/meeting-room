@@ -28,13 +28,23 @@ class IndexController extends AbstractActionController
     public function addAction()
     {
         $mrForm   = $this->getServiceLocator()->get('MeetingRoom\Form\MeetingRoom');
+        /** @var \MeetingRoom\Mapper\MeetingRoomMapper $mrMapper */
+        $mrMapper = $this->getServiceLocator()->get('MeetingRoom\Mapper\MeetingRoom');
+        /** @var \MeetingRoom\Mapper\PcMapper $pcMapper*/
+        $pcMapper = $this->getServiceLocator()->get('MeetingRoom\Mapper\Pc');
 
         if($this->request->isPost()){
-            $mrForm->setData($this->request->getPost());
+            $post = $this->request->getPost();
+            $mrForm->setData($post);
             if($mrForm->isValid()){
-                var_dump($mrForm->getData());
-                //$mrForm->save($pcForm->getData());
-                //$this->redirect()->toRoute('pc', array('action' => 'list'));
+                $pcId = (int) $post->mr_fieldset['pc_id'];
+                $pc = $pcMapper->getItemById($pcId);
+                if($pc){
+                    $meetingRoom = $mrForm->getData();
+                    $meetingRoom->setPc($pc);
+                    $mrMapper->save($meetingRoom);
+                    $this->redirect()->toRoute('rooms', array('action' => 'index'));
+                }
             }
         }
 
