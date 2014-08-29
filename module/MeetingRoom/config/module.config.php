@@ -64,7 +64,7 @@ return array(
                 return new \MeetingRoom\Form\PcForm();
             },
             'MeetingRoom\Form\MeetingRoom' => function($serviceManager){
-                return new \MeetingRoom\Form\MeetingRoomForm($serviceManager->get('Doctrine\ORM\EntityManager'));
+                return new \MeetingRoom\Form\MeetingRoomForm($serviceManager);
             },
             'MeetingRoom\Mapper\Pc' => function($serviceManager){
                 return new \MeetingRoom\Mapper\PcMapper($serviceManager->get('Doctrine\ORM\EntityManager'));

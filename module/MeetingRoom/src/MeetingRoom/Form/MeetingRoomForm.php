@@ -11,15 +11,21 @@ namespace MeetingRoom\Form;
 use Doctrine\ORM\EntityManager;
 use Zend\Form\Form;
 use MeetingRoom\Form\MeetingRoomFieldset;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 
-class MeetingRoomForm extends Form
+class MeetingRoomForm extends Form implements ServiceLocatorAwareInterface
 {
-    public function __construct(EntityManager $em)
+    protected $serviceLocator;
+
+    public function __construct(ServiceLocatorInterface $serviceLocator)
     {
+        $this->setServiceLocator($serviceLocator);
+
         parent::__construct('mr');
         $this->setAttribute('method', 'post');
 
-        $meetingRoomFieldset = new MeetingRoomFieldset($em);
+        $meetingRoomFieldset = new MeetingRoomFieldset($this->getServiceLocator());
         $meetingRoomFieldset->setOptions(array(
             'use_as_base_fieldset' => true
         ));
@@ -34,4 +40,24 @@ class MeetingRoomForm extends Form
             ),
         ));
     }
-} 
+
+    /**
+     * Set service locator
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
+    /**
+     * Get service locator
+     *
+     * @return ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
+    }
+}

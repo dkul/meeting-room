@@ -54,6 +54,7 @@ class PcController extends AbstractActionController
 
     public function listAction()
     {
+        /** @var \MeetingRoom\Mapper\PcMapper $pcMapper */
         $pcMapper = $this->getServiceLocator()->get('MeetingRoom\Mapper\Pc');
         return array('listPc' => $pcMapper->getList());
     }

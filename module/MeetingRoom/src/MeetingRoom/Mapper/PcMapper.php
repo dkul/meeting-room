@@ -24,4 +24,14 @@ class PcMapper extends AbstractMapper
     {
         return $this->getEntityManager()->getRepository(self::EntityClass)->findAll();
     }
+
+    public function getListNotUsed(){
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+        $queryBuilder->select('pc')
+                     ->from('MeetingRoom\Entity\PC', 'pc')
+                     ->leftJoin('MeetingRoom\Entity\MeetingRoom', 'm', 'WITH', 'pc.id = m.pc')
+                     ->where('m.pc IS NULL');
+        $query = $queryBuilder->getQuery();
+        return $query->getResult();
+    }
 }

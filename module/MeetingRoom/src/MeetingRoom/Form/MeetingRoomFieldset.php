@@ -11,18 +11,20 @@ namespace MeetingRoom\Form;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 use MeetingRoom\Entity\MeetingRoom;
 use Base\Mapper\EntityManagerAwareInterface;
 use Doctrine\ORM\EntityManager;
+use Zend\ServiceManager\ServiceLocatorAwareInterface;
 
-class MeetingRoomFieldset extends Fieldset implements InputFilterProviderInterface, EntityManagerAwareInterface
+class MeetingRoomFieldset extends Fieldset implements InputFilterProviderInterface, ServiceLocatorAwareInterface
 {
-    protected $entityManager;
+    protected $serviceLocator;
 
-    public function __construct(EntityManager $em)
+    public function __construct(ServiceLocatorInterface $serviceLocator)
     {
-        $this->setEntityManager($em);
+        $this->setServiceLocator($serviceLocator);
 
         parent::__construct('mr_fieldset');
         $this->setHydrator(new ClassMethodsHydrator(true))
@@ -59,7 +61,7 @@ class MeetingRoomFieldset extends Fieldset implements InputFilterProviderInterfa
                 'empty_option'   => '--- please choose ---'
             ),
         ));
-        $this->add(array(
+        /*$this->add(array(
             'type'    => 'DoctrineModule\Form\Element\ObjectSelect',
             'name'    => 'pc_id',
             'options' => array(
@@ -69,7 +71,7 @@ class MeetingRoomFieldset extends Fieldset implements InputFilterProviderInterfa
                 'property'       => 'title',
                 'empty_option'   => '--- please choose ---'
             ),
-        ));
+        ));*/
     }
     /**
      * Should return an array specification compatible with
@@ -94,18 +96,39 @@ class MeetingRoomFieldset extends Fieldset implements InputFilterProviderInterfa
         );
     }
 
-    public function setEntityManager(EntityManager $em){
-        $this->entityManager = $em;
-    }
-
-    public function getEntityManager(){
-        return $this->entityManager;
-    }
-
+    /**
+     * @return array
+     */
     public function getOptionsForSelect(){
-        $selectData = array(
-           1 => 'Test'
-        );
+        $selectData = array();
+        /** @var \MeetingRoom\Mapper\PcMapper $pcMapper */
+        $pcMapper = $this->getServiceLocator()->get('MeetingRoom\Mapper\Pc');
+        $listPc = $pcMapper->getListNotUsed();
+        if($listPc){
+            foreach($listPc as $pc){
+                $selectData[$pc->getId()] = $pc->getTitle();
+            }
+        }
         return $selectData;
+    }
+
+    /**
+     * Set service locator
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     */
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator)
+    {
+        $this->serviceLocator = $serviceLocator;
+    }
+
+    /**
+     * Get service locator
+     *
+     * @return ServiceLocatorInterface
+     */
+    public function getServiceLocator()
+    {
+        return $this->serviceLocator;
     }
 }
