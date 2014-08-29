@@ -61,7 +61,33 @@ return array(
         'factories' => array(
             'Model\MeetingRoomList' => function(){
                 return new \MeetingRoom\Model\MeetingRoomList();
-            }
+            },
+            '\Form\PcForm' => function()
+                {
+                    return new \MeetingRoom\Form\PcForm();
+                },
+            '\Form\PC' => function()
+                {
+                    return new \MeetingRoom\Form\PC();
+                },
+            'MeetingRoom\Mapper\PC' => function($serviceManager)
+                {
+                    return new \MeetingRoom\Mapper\PcMapper(
+                        $serviceManager->get('Doctrine\ORM\EntityManager')
+                    );
+                },
+            'MeetingRoom\Grid\MeetingRoom' => function($serviceManager)
+                {
+                    $grid = new \MeetingRoom\Model\MeetingRoomGrid();
+                    $grid->setEntityManager($serviceManager->get('Doctrine\ORM\EntityManager'));
+                    return $grid;
+                },
+            'MeetingRoom\Grid\PC' => function($serviceManager)
+                {
+                    $grid = new \MeetingRoom\Model\PcGrid();
+                    $grid->setEntityManager($serviceManager->get('Doctrine\ORM\EntityManager'));
+                    return $grid;
+                }
         )
     ),
     'doctrine' => array(

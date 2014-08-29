@@ -8,7 +8,7 @@ $formLabel = $this->plugin('formLabel');
     <fieldset>
         <legend><?php echo $this->title; ?></legend>
         <?php
-        $title = $form->get('title');
+      //  $title = $form->get('title');
         echo $formLabel->openTag() . $title->getOption('label') . $formLabel->closeTag();
         echo $this->formInput($title);
         echo $this->formElementErrors($title);
