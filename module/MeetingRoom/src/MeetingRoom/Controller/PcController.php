@@ -9,11 +9,16 @@
 
 namespace MeetingRoom\Controller;
 
+
 use MeetingRoom\Model\MeetingRoomList;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use MeetingRoom\Entity\MeetingRoom as MeetingRoomEntity;
 use MeetingRoom\Entity\PC;
+
+use MeetingRoom\Form\PcForm;
+use MeetingRoom\Form\PcFilter;
+/*use Application\Grid\AbstractGrid;*/
 
 class PcController extends AbstractActionController
 {
@@ -44,6 +49,34 @@ class PcController extends AbstractActionController
 
     public function editAction()
     {
+
+        $pcFormE   = $this->getServiceLocator()->get('MeetingRoom\Form\Pc');
+        $pcMapperE = $this->getServiceLocator()->get('MeetingRoom\Mapper\Pc');
+
+
+        $id = $this->params()->fromRoute('id');
+
+        if(!empty($id)){
+            $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+            $result = $entityManager->getRepository('MeetingRoom\Entity\PC')->find($id);
+            $data = array('result' => $result);
+        }
+
+        $pcFormE->bind($result);
+
+        if($this->request->isPost()){
+                $pcFormE->setData($this->request->getPost());
+                if($pcFormE->isValid()){
+                    $pcMapperE->save($pcFormE->getData());
+                    $this->redirect()->toRoute('pc', array('action' => 'list'));
+                }
+            }
+
+        $view = new ViewModel(array(
+            'form' => $pcFormE
+        ));
+        $view->setTemplate('meeting-room/pc/form/pc-form');
+        return $view;
 
     }
 

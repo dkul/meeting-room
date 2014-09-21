@@ -1,18 +1,27 @@
+<a href="<?php echo $this->url('pc', array('action' => 'add'));?>">
+    <div class="btn btn-large btn-primary" type="button">
+        <?php echo $this->translate('Добавление нового компьютера');?>
+    </div>
+</a>
 <table class="table">
     <thead>
-        <th><?php echo $this->translate('Title'); ?></th>
-        <th><?php echo $this->translate('Is camera'); ?></th>
-        <th><?php echo $this->translate('Is internet'); ?></th>
-        <th><?php echo $this->translate('Action'); ?></th>
+    <th><?php echo $this->translate('Title'); ?></th>
+    <th><?php echo $this->translate('Is camera'); ?></th>
+    <th><?php echo $this->translate('Is internet'); ?></th>
+    <th><?php echo $this->translate('Action'); ?></th>
     </thead>
     <?php foreach($this->listPc as $pc){ ?>
-        <tr>
-            <td><?php echo $pc->getTitle(); ?></td>
-            <td><?php echo $pc->getIsCamera(); ?></td>
-            <td><?php echo $pc->getIsInternet(); ?></td>
-            <td>
-                <a href="<?php echo $this->url('pc', array('action' => 'edit', 'id' => $pc->getId())); ?>"><?php echo $this->translate('Edit'); ?></a>
-            </td>
-        <tr>
-    <?php } ?>
+    <tr>
+        <td><?php echo $pc->getTitle(); ?></td>
+        <td><?php echo $pc->getIsCamera(); ?></td>
+        <td><?php echo $pc->getIsInternet(); ?></td>
+        <td>
+            <a href="<?php echo $this->url('pc', array('action' => 'edit', 'id' => $pc->getId())); ?>">
+                <div class="btn btn-mini btn-warning" type="button">
+                    <?php echo $this->translate('Редактировать');?>
+                </div>
+            </a>
+        </td>
+    <tr>
+        <?php } ?>
 </table>

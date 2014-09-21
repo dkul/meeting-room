@@ -1,0 +1,35 @@
+<a href="<?php echo $this->url('user', array('action' => 'add'));?>">
+    <div class="btn btn-large btn-primary" type="button">
+        <?php echo $this->translate('Добавление нового пользователя');?>
+    </div>
+</a>
+<table class="table">
+    <thead>
+    <th><?php echo $this->translate('Логин'); ?></th>
+    <th><?php echo $this->translate('Пароль'); ?></th>
+    <th><?php echo $this->translate('ФИО'); ?></th>
+    <th><?php echo $this->translate('Должность'); ?></th>
+    <th><?php echo $this->translate('email'); ?></th>
+    <th><?php echo $this->translate('Роль'); ?></th>
+    <th><?php echo $this->translate('Аватар'); ?></th>
+    <th><?php echo $this->translate('Действие'); ?></th>
+</thead>
+<?php foreach($this->listUser as $user){ ?>
+<tr>
+    <td><?php echo $user->getLogin(); ?></td>
+    <td><?php echo $user->getPassword(); ?></td>
+    <td><?php echo $user->getFIO(); ?></td>
+    <td><?php echo $user->getPost(); ?></td>
+    <td><?php echo $user->getEmail(); ?></td>
+    <td><?php echo $user->getRole(); ?></td>
+    <td><?php echo $user->getAvatar(); ?></td>
+    <td>
+         <a href="<?php echo $this->url('user', array('action' => 'edit', 'id' => $user->getId())); ?>">
+                <div class="btn btn-mini btn-warning" type="button">
+                    <?php echo $this->translate('Редактировать');?>
+                </div>
+            </a>
+    </td>
+<tr>
+    <?php } ?>
+    </table>

@@ -1,0 +1,58 @@
+<?php
+
+$eventForm = $this->form;
+$eventForm->prepare();
+
+$formLabel = $this->plugin('formLabel');
+$eventFieldset = $eventForm->get('event_fieldset');
+?>
+
+<?php echo $this->form()->openTag($eventForm); ?>
+    <fieldset>
+
+        <legend>Добавление события</legend>
+
+        <div class="form-group">
+            <?php
+            $title = $eventFieldset->get('time');
+            $title->setAttribute('class','form-control');
+            echo $formLabel->openTag() . $this->translate($title->getOption('label')) . $formLabel->closeTag();
+            echo $this->formInput($title);
+            echo $this->formElementErrors($title);
+            ?>
+        </div>
+
+        <div class="MRSelect">
+            <?php echo $this->formRow($eventFieldset->get('meeting_room_id')); ?>
+        </div>
+
+        <div class="USelect">
+            <?php echo $this->formRow($eventFieldset->get('user_id')); ?>
+        </div>
+
+        <div class="form-group">
+            <?php
+            $title = $eventFieldset->get('description');
+            $title->setAttribute('class','form-control');
+            echo $formLabel->openTag() . $this->translate($title->getOption('label')) . $formLabel->closeTag();
+            echo $this->formInput($title);
+            echo $this->formElementErrors($title);
+            ?>
+        </div>
+
+        <div class="SSelect">
+            <?php echo $this->formRow($eventFieldset->get('status')); ?>
+        </div>
+
+        <div class="TSelect">
+            <?php echo $this->formRow($eventFieldset->get('type')); ?>
+        </div>
+
+
+        <?php
+        $submit = $eventForm->get('submit');
+        $submit->setAttribute('class', 'btn btn-success');
+        echo $this->formElement($submit);
+        ?>
+    </fieldset>
+<?php echo $this->form()->closeTag();?>

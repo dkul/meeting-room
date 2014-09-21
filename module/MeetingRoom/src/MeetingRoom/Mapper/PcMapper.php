@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: kuleshov
- * Date: 29.08.14
- * Time: 7:02
- * To change this template use File | Settings | File Templates.
- */
 
 namespace MeetingRoom\Mapper;
 

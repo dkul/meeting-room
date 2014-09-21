@@ -31,13 +31,43 @@ return array(
                         'action'     => 'index',
                     ),
                 ),
+            ),
+            'user' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/user[/:action][/:id]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'         => '[0-9]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'MeetingRoom\Controller\User',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'event' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    'route'    => '/event[/:action][/:id]',
+                    'constraints' => array(
+                        'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'         => '[0-9]*'
+                    ),
+                    'defaults' => array(
+                        'controller' => 'MeetingRoom\Controller\Event',
+                        'action'     => 'index',
+                    ),
+                ),
             )
         ),
     ),
     'controllers' => array(
         'invokables' => array(
             'MeetingRoom\Controller\Index' => 'MeetingRoom\Controller\IndexController',
-            'MeetingRoom\Controller\Pc'    => 'MeetingRoom\Controller\PcController'
+            'MeetingRoom\Controller\Pc'    => 'MeetingRoom\Controller\PcController',
+            'MeetingRoom\Controller\User'    => 'MeetingRoom\Controller\UserController',
+            'MeetingRoom\Controller\Event'    => 'MeetingRoom\Controller\EventController'
         ),
     ),
     'view_manager' => array(
@@ -66,12 +96,24 @@ return array(
             'MeetingRoom\Form\MeetingRoom' => function($serviceManager){
                 return new \MeetingRoom\Form\MeetingRoomForm($serviceManager);
             },
+            'MeetingRoom\Form\User' => function($serviceManager){
+                    return new \MeetingRoom\Form\UserForm($serviceManager);
+                },
+            'MeetingRoom\Form\Event' => function($serviceManager){
+                    return new \MeetingRoom\Form\EventForm($serviceManager);
+                },
             'MeetingRoom\Mapper\Pc' => function($serviceManager){
                 return new \MeetingRoom\Mapper\PcMapper($serviceManager->get('Doctrine\ORM\EntityManager'));
             },
             'MeetingRoom\Mapper\MeetingRoom' => function($serviceManager){
                 return new \MeetingRoom\Mapper\MeetingRoomMapper($serviceManager->get('Doctrine\ORM\EntityManager'));
-            }
+            },
+            'MeetingRoom\Mapper\User' => function($serviceManager){
+                    return new \MeetingRoom\Mapper\UserMapper($serviceManager->get('Doctrine\ORM\EntityManager'));
+                },
+            'MeetingRoom\Mapper\Event' => function($serviceManager){
+                    return new \MeetingRoom\Mapper\EventMapper($serviceManager->get('Doctrine\ORM\EntityManager'));
+                }
         )
     ),
     'doctrine' => array(

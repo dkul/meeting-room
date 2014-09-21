@@ -1,3 +1,50 @@
+<!--////////////////////////////////////////////////////////////////////////-->
+<?php echo $this->headLink()
+    ->appendStylesheet($this->basePath() . '/css/jquery-ui.css');?>
+
+
+<?php echo $this->headScript()
+    ->appendFile($this->basePath() . '/js/jquery-ui.js');?>
+
+
+<?php echo $this->headScript()
+    ->appendFile($this->basePath() . '/js/calendar.js');?>
+
+<!--////////////////////////////////////////////////////////////////////////-->
+
 <div class="jumbotron">
-    <h1>Hello world!</h1>
+    <p>Выберите дату: <input type="text" id="datepicker"></p>
 </div>
+
+
+
+<table class="table table-striped">
+    <thead>
+    <th><?php echo $this->translate('Время'); ?></th>
+    <th><?php echo $this->translate('Тип'); ?></th>
+
+    </thead>
+
+
+
+<?php
+
+for ($i=8;$i<21;$i++){
+
+?>
+    <tr class="success">
+    <?php for ($j=0;$j<2;$j++){?>
+        <td class="success">
+            <?php  if ($j==0){
+                echo $i.":00 - ".($i+1).":00";
+            }
+                   if ($j!=0){
+                       echo '<div class="btn btn-mini btn-warning" type="button">'.'</div>';
+
+            }?>
+
+        </td>
+<?php }?>
+    </tr>
+<?php }?>
+</table>

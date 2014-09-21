@@ -57,19 +57,41 @@ class IndexController extends AbstractActionController
 
     public function editAction()
     {
-        //параметр из route - id
+
+        $mrForm   = $this->getServiceLocator()->get('MeetingRoom\Form\MeetingRoom');
+        /** @var \MeetingRoom\Mapper\MeetingRoomMapper $mrMapper */
+        $mrMapper = $this->getServiceLocator()->get('MeetingRoom\Mapper\MeetingRoom');
+        /** @var \MeetingRoom\Mapper\PcMapper $pcMapper*/
+        $pcMapper = $this->getServiceLocator()->get('MeetingRoom\Mapper\Pc');
+
         $id = $this->params()->fromRoute('id');
+
         if(!empty($id)){
             $entityManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
             $result = $entityManager->getRepository('MeetingRoom\Entity\MeetingRoom')->find($id);
-
             $data = array('result' => $result);
-        }else{
-            $data = array('error' => 'Input id to URL');
+        }
+        $mrForm->bind($result);
+
+        if($this->request->isPost()){
+            $post = $this->request->getPost();
+            $mrForm->setData($post);
+            if($mrForm->isValid()){
+                $pcId = (int) $post->mr_fieldset['pc_id'];
+                $pc = $pcMapper->getItemById($pcId);
+                if($pc){
+                    $meetingRoom = $mrForm->getData();
+                    $meetingRoom->setPc($pc);
+                    $mrMapper->save($meetingRoom);
+                    $this->redirect()->toRoute('rooms', array('action' => 'index'));
+                }
+            }
         }
 
-        $view = new ViewModel($data);
-        $view->setTemplate('meeting-room/form/edit-meeting-room');
+        $view = new ViewModel(array(
+            'form' => $mrForm
+        ));
+        $view->setTemplate('meeting-room/form/mr-form');
         return $view;
     }
 

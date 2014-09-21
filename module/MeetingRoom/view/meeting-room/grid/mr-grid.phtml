@@ -1,18 +1,27 @@
+<a href="<?php echo $this->url('rooms', array('action' => 'add'));?>">
+    <div class="btn btn-large btn-primary" type="button">
+        <?php echo $this->translate('Добавление переговорной комнаты');?>
+    </div>
+</a>
+
 <table class="table">
     <thead>
-        <th><?php echo $this->translate('Title'); ?></th>
-        <th><?php echo $this->translate('Place'); ?></th>
-        <th><?php echo $this->translate('Capacity'); ?></th>
-        <th><?php echo $this->translate('Action'); ?></th>
+        <th><?php echo $this->translate('Название'); ?></th>
+        <th><?php echo $this->translate('Место проведения'); ?></th>
+        <th><?php echo $this->translate('Вместимость'); ?></th>
+        <th><?php echo $this->translate('Действие'); ?></th>
     </thead>
     <?php foreach($this->listMR as $meetingRoom){ ?>
         <tr>
             <td><?php echo $meetingRoom->getTitle(); ?></td>
             <td><?php echo $meetingRoom->getPlace(); ?></td>
             <td><?php echo $meetingRoom->getCapacity(); ?></td>
-            <td></td>
-            <td>
-                <a href="<?php echo $this->url('rooms', array('action' => 'edit', 'id' => $meetingRoom->getId())); ?>"><?php echo $this->translate('Edit'); ?></a>
+            <td align="left">
+                <a href="<?php echo $this->url('rooms', array('action' => 'edit', 'id' => $meetingRoom->getId())); ?>">
+                    <div class="btn btn-mini btn-warning" type="button">
+                        <?php echo $this->translate('Редактировать');?>
+                    </div>
+                </a>
             </td>
         <tr>
     <?php } ?>
